@@ -1,5 +1,4 @@
-import EndpointUser from '../models/endpoint-user.model';
-import User from '../models/user.model';
+import { EndpointUser, User } from '../models';
 
 const defaultUser = new EndpointUser();
 
