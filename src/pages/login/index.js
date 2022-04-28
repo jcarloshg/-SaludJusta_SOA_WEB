@@ -1,37 +1,34 @@
-import { Button, Input, Link, Spacer, Text } from '@nextui-org/react';
+import { Spacer } from '@nextui-org/react';
+import { useState } from 'react';
+import { MainButton, MainTitle, SecondaryButton } from '../../components';
+import { InputEmail, InputPassword } from './components';
 import './Login.css';
 
 function Login() {
-  return ( 
-    <main className='main'>
-      <Text h1 color='#028174'>Iniciar sesión</Text>
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const onChangeEmail = (value) => {
+    const newEmail = value.nativeEvent.target.value;
+    setEmail(newEmail);
+  };
+
+  const onChangePassword = (value) => {
+    const newPassword = value.nativeEvent.target.value;
+    setPassword(newPassword);
+  };
+
+  return (
+    <main className="main">
+      <MainTitle text="Iniciar sesión" />
+      <Spacer y={1.6} />
+      <InputEmail value={email} onChange={onChangeEmail} />
+      <Spacer y={1.6} />
+      <InputPassword value={password} onChange={onChangePassword} />
+      <Spacer y={1.6} />
+      <MainButton text="Iniciar sesión" />
       <Spacer y={0.8} />
-      <Input label="Correo" placeholder="correo@ejemplo.com" width='250px'/>
-      <Spacer y={0.8} />
-      <Input.Password label="Contraseña" placeholder="xxxxxxxxxxxx" width='250px' />
-      <Spacer y={1.2} />
-      <Button
-        css={{
-          borderRadius: '8px',
-          backgroundColor: '#0AB68B',
-          width: '250px',
-        }}
-      >
-        Iniciar sesión
-      </Button>
-      <Spacer y={0.8} />
-      <Button
-        bordered={false}
-        css={{
-          borderRadius: '8px',
-          color: '#0AB68B',
-          border: '1px solid #FFFFFF',
-          backgroundColor: '#fff',
-          width: '250px',
-        }}
-      >
-        Olvide mi contraseña
-      </Button>
+      <SecondaryButton text="Olvide mi contraseña" />
     </main>
   );
 }
