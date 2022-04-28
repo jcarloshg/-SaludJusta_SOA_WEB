@@ -11,6 +11,9 @@ function InputEmail({ value = '', width = 250, onChange = (e) => e.preventDefaul
       autoComplete="off"
       bordered
       color="primary"
+      // css={{
+      //   fontSize: '1rem',
+      // }}
     />
   );
 }

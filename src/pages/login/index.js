@@ -1,6 +1,6 @@
 import { Spacer } from '@nextui-org/react';
 import { useState } from 'react';
-import { MainButton, MainTitle, SecondaryButton } from '../../components';
+import { MainButton, MainTitle, SecondaryButton, Topbar } from '../../components';
 import { InputEmail, InputPassword } from './components';
 import './Login.css';
 
@@ -19,17 +19,20 @@ function Login() {
   };
 
   return (
-    <main className="main">
-      <MainTitle text="Iniciar sesión" />
-      <Spacer y={1.6} />
-      <InputEmail value={email} onChange={onChangeEmail} />
-      <Spacer y={1.6} />
-      <InputPassword value={password} onChange={onChangePassword} />
-      <Spacer y={1.6} />
-      <MainButton text="Iniciar sesión" />
-      <Spacer y={0.8} />
-      <SecondaryButton text="Olvide mi contraseña" />
-    </main>
+    <>
+      <Topbar />
+      <main className="main">
+        <MainTitle text="Iniciar sesión" />
+        <Spacer y={1.6} />
+        <InputEmail value={email} onChange={onChangeEmail} />
+        <Spacer y={1.6} />
+        <InputPassword value={password} onChange={onChangePassword} />
+        <Spacer y={1.6} />
+        <MainButton text="Iniciar sesión" />
+        <Spacer y={0.8} />
+        <SecondaryButton text="Olvide mi contraseña" />
+      </main>
+    </>
   );
 }
 

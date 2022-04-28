@@ -4,3 +4,4 @@ export { default as SecondaryButton } from './secondary-button.component';
 export { default as Subtitle } from './subtitle.component';
 export { default as Title } from './title.component';
 export { default as theme } from './theme';
+export { default as Topbar } from './topbar.component';
