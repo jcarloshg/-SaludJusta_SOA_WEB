@@ -1,0 +1,17 @@
+
+.container_menu_dashboard {
+    display: flex;
+    flex-direction: row;
+    height: 92vh;
+    width: 100%;
+}
+
+.menu_left {
+    width: 20%;
+    padding: 10px;
+}
+
+.dashboard{
+    width: 80%;
+    padding: 10px;
+}

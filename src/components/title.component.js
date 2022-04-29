@@ -2,7 +2,7 @@ import { Text } from '@nextui-org/react';
 
 function Title({ text = '' }) {
   return (
-    <Text h1 size={28} color="#001917" weight="bold">
+    <Text h1 size={28} color="primary" weight="bold">
       {text}
     </Text>
   );
