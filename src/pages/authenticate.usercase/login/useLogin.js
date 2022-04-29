@@ -1,3 +1,4 @@
+import { USER_ROLE } from "../../../utilities/USER_ROLE";
 import createAdaptedUser from "../login/adapters/user.adapter";
 import { existAccount } from "./services";
 import { loggin } from "./services/loggin";
@@ -7,8 +8,8 @@ export const useLogin = () => {
 
     const iniciarSesion_proof = async () => {
 
-        const emailExample = "carlosj12336@gmail.com";
-        const passwordExample = "jose123";
+        const emailExample = "richie@email.com";
+        const passwordExample = "richie123";
 
         const resExistAccount = await existAccount(emailExample);
 
@@ -21,14 +22,10 @@ export const useLogin = () => {
         }
 
         const resLoggin = await loggin(emailExample, passwordExample);
-        const userClient = resExistAccount ? createAdaptedUser(resLoggin.data) : null;
+        const employe = resExistAccount ? createAdaptedUser(resLoggin.data) : null;
 
-        console.log(`[userClient] -> `, userClient);
-
-
-        // * ================================
-        // ! go to the screens user
-        // * ================================
+        if (employe.role === USER_ROLE.RECEPTIONIST) console.log(employe.role);
+        if (employe.role === USER_ROLE.LAB_TECHNICIAN) console.log(employe.role);
 
     }
 
