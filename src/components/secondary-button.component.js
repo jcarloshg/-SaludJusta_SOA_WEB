@@ -6,8 +6,8 @@ function SecondaryButton({ text = '', width = 250 }) {
       css={{
         borderRadius: '8px',
         color: '#0AB68B',
-        border: '1px solid #FFFFFF',
-        backgroundColor: '#fff',
+        border: '1px solid #F2FFFE',
+        backgroundColor: '#F2FFFE',
         width: `${width}px`,
       }}
     >

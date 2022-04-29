@@ -1,0 +1,23 @@
+.topbar {
+  background-color: #f2fffe;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topbar__left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.topbar__right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

@@ -16,6 +16,7 @@ function MainButton({ func = null, text = '', width = 250 }) {
       css={{
         borderRadius: '8px',
         width: `${width}px`,
+        // fontSize: '1rem',
       }}
       color="primary"
       shadow

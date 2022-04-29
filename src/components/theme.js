@@ -50,7 +50,7 @@ const theme = createTheme({
     fontSizes: {
       tiny: '.75rem',
       xs: '0.875rem',
-      base: '1rem',
+      base: '1.125rem',
       sm: '1.25rem',
       md: '1.5rem',
       lg: '2.25rem',
