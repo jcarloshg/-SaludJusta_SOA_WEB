@@ -1,6 +1,6 @@
 import { Spacer } from '@nextui-org/react';
 import { useState } from 'react';
-import { MainButton, MainTitle, SecondaryButton, Topbar } from '../../components';
+import { MainButton, MainTitle, SecondaryButton, Topbar } from '../../../components';
 import { InputEmail, InputPassword } from './components';
 import './Login.css';
 import { useLogin } from './useLogin';

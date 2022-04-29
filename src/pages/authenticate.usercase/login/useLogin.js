@@ -1,6 +1,5 @@
-import createAdaptedUser from "../../adapters/user.adapter";
+import createAdaptedUser from "../../../adapters/user.adapter";
 import { existAccount } from "./services";
-
 
 
 export const useLogin = () => {
@@ -13,6 +12,8 @@ export const useLogin = () => {
         const userClient = resExistAccount
             ? createAdaptedUser(resExistAccount.data)
             : null;
+
+        console.log(`[userClient] -> `, userClient);
 
         // * ================================
         // ! go to create new user
