@@ -1,5 +1,6 @@
 
-import { Spacer } from '@nextui-org/react';
+import { Button, Spacer } from '@nextui-org/react';
+import { useNavigate } from "react-router-dom"
 import './MenuItem.css';
 
 export const MenuItem = ({
@@ -8,12 +9,19 @@ export const MenuItem = ({
     destino = "",
 }) => {
 
+    const navigate = useNavigate();
+
+    const navigateTo = () => navigate(destino);
+
     return (
-        <div className="menuItem">
+        <Button
+            light color="primary"
+            onClick={() => navigateTo()}
+            auto css={{ width: '100%', justifyContent: 'left' }}
+        >
             <p style={{ fontSize: 14 }}>[O]</p>
             <Spacer x={0.5} />
             <p style={{ fontSize: 14 }}>{label}</p>
-            {/* <p style={{ fontSize: 14 }}>{destino}</p> */}
-        </div>
+        </Button>
     );
 }
