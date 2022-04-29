@@ -1,9 +1,11 @@
-import { MainButton, Subtitle } from "../../../components";
+import { MainButton } from "../../../components";
 import { Routes, Route } from "react-router-dom";
 import './HomeExam.css';
 import { ExamenesPendientes } from "../ExamenesPendientes/ExamenesPendientes";
 import { Laboratorios } from "../Laboratorios/Laboratorios";
 import { useNavigate } from "react-router-dom"
+import { MenuLeft } from "../../../components/MenuLeft/MenuLeft";
+import { ItemsMenu } from "./models/ItemsMenu";
 
 export function HomeExam(params) {
 
@@ -28,9 +30,9 @@ export function HomeExam(params) {
 
             <div className="border_generic container_menu_dashboard">
 
-                <div className="border_generic menu_left">
-                    <Subtitle text="Menú" />
-                </div>
+                <MenuLeft
+                    arrayItems={ItemsMenu}
+                />
 
                 <div className="border_generic dashboard" >
                     <Routes>
