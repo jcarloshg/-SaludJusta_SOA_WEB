@@ -1,11 +1,29 @@
+.topbar-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 101;
+  background: #f2fffe;
+  /*
+  min-height: 4rem;
+  width: 100%;
+  z-index: 101;
+  margin-top: 0; */
+}
+
 .topbar {
-  background-color: #f2fffe;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #001e1b;
   padding: 16px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+
+  /* position: fixed; */
+  /* width: 100%;
+  height: 4rem;
+  z-index: 101;
+  overflow: auto; */
 }
 
 .topbar__left {

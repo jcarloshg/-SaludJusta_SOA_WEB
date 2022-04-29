@@ -1,0 +1,12 @@
+.separator {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.separator-line {
+  width: 85%;
+  height: 2px;
+  background: #001e1b;
+}
