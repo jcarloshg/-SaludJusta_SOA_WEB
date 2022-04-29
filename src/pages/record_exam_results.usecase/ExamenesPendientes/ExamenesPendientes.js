@@ -1,6 +1,9 @@
 import { Title } from "../../../components";
+import { useExamenesPendientes } from "./useExamenesPendientes";
 
 export const ExamenesPendientes = () => {
+
+    useExamenesPendientes();
 
     return (
         <div>

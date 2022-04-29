@@ -1,7 +1,7 @@
 
 // const axios = require('axios').default;
 
-export const requestExamsToday = () => {
+export const requestExamsToday = async () => {
 
     try {
         // http://localhost:8080/api_account/existAccount?email=alejando@email.com

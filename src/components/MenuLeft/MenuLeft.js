@@ -12,11 +12,12 @@ export const MenuLeft = ({ arrayItems = [] }) => {
             <div>
                 {
                     arrayItems.map(
-                        item =>
+                        (item, index) =>
                             <MenuItem
                                 icon={item.icon}
                                 label={item.label}
                                 destino={item.destino}
+                                key={index}
                             />
                     )
                 }
