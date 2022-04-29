@@ -1,4 +1,4 @@
-import createAdaptedUser from "../../../adapters/user.adapter";
+import createAdaptedUser from "../login/adapters/user.adapter";
 import { existAccount } from "./services";
 
 
@@ -19,7 +19,8 @@ export const useLogin = () => {
         // ! go to create new user
         // * ================================
         if (userClient === null) {
-
+            // TODO - show error 
+            return;
         }
 
         // * ================================
