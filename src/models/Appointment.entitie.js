@@ -1,4 +1,4 @@
-const Exam = require("./Exam");
+const Exam = require("./Exam.entitie");
 
 class Appointment {
     constructor({

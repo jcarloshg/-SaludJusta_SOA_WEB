@@ -1,4 +1,4 @@
-const Appointment = require("./Appointment");
+const Appointment = require("./Appointment.entitie");
 
 class User {
 
