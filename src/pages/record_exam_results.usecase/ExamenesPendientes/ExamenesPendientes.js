@@ -5,7 +5,7 @@ import { useExamenesPendientes } from "./useExamenesPendientes";
 export const ExamenesPendientes = () => {
 
     const {
-        appointmensToday,
+        examsViewObject
     } = useExamenesPendientes();
 
     const columns = [
@@ -109,6 +109,12 @@ export const ExamenesPendientes = () => {
     return (
         <>
             <Title text="Examenes pendientes" />
+
+            <Spacer y={1} x={2} />
+            {
+                examsViewObject.map((item, index) => <p key={index}>{JSON.stringify(item)}</p>)
+            }
+
             <Spacer y={1} x={2} />
             <Table
                 aria-label="Example table with custom cells"
