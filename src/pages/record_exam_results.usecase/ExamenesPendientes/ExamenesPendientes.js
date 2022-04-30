@@ -1,5 +1,5 @@
+import { Table, Row, Col, User, Text, Spacer } from "@nextui-org/react";
 import { Title } from "../../../components";
-import { AppointmentsView } from "./components/AppointmentsView/AppointmentsView";
 import { useExamenesPendientes } from "./useExamenesPendientes";
 
 export const ExamenesPendientes = () => {
@@ -8,18 +8,134 @@ export const ExamenesPendientes = () => {
         appointmensToday,
     } = useExamenesPendientes();
 
+    const columns = [
+        { name: "NAME", uid: "name" },
+        { name: "ROLE", uid: "role" },
+        { name: "STATUS", uid: "status" },
+        { name: "ACTIONS", uid: "actions" },
+    ];
+    const users = [
+        {
+            id: 1,
+            name: "Tony Reichert",
+            role: "CEO",
+            team: "Management",
+            status: "active",
+            age: "29",
+            avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
+            email: "tony.reichert@example.com",
+        },
+        {
+            id: 2,
+            name: "Zoey Lang",
+            role: "Technical Lead",
+            team: "Development",
+            status: "paused",
+            age: "25",
+            avatar: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
+            email: "zoey.lang@example.com",
+        },
+        {
+            id: 3,
+            name: "Jane Fisher",
+            role: "Senior Developer",
+            team: "Development",
+            status: "active",
+            age: "22",
+            avatar: "https://i.pravatar.cc/150?u=a04258114e29026702d",
+            email: "jane.fisher@example.com",
+        },
+        {
+            id: 4,
+            name: "William Howard",
+            role: "Community Manager",
+            team: "Marketing",
+            status: "vacation",
+            age: "28",
+            avatar: "https://i.pravatar.cc/150?u=a048581f4e29026701d",
+            email: "william.howard@example.com",
+        },
+        {
+            id: 5,
+            name: "Kristen Copper",
+            role: "Sales Manager",
+            team: "Sales",
+            status: "active",
+            age: "24",
+            avatar: "https://i.pravatar.cc/150?u=a092581d4ef9026700d",
+            email: "kristen.cooper@example.com",
+        },
+    ];
+    const renderCell = (user, columnKey) => {
+        const cellValue = user[columnKey];
+        switch (columnKey) {
+            case "name":
+                return (
+                    <User squared src={user.avatar} name={cellValue} css={{ p: 0 }}>
+                        {user.email}
+                    </User>
+                );
+            case "role":
+                return (
+                    <Col>
+                        <Row>
+                            <Text b size={14} css={{ tt: "capitalize" }}>
+                                {cellValue}
+                            </Text>
+                        </Row>
+                        <Row>
+                            <Text b size={13} css={{ tt: "capitalize", color: "$accents3" }}>
+                                {user.team}
+                            </Text>
+                        </Row>
+                    </Col>
+                );
+            case "status":
+                return <Text b size={14}>{cellValue}</Text>
+            // return <StyledBadge type={user.status}>{cellValue}</StyledBadge>;
+
+            case "actions":
+                return (
+                    <Row justify="center" align="center">
+                        <Col css={{ d: "flex" }}>
+                            <Text>ACITION</Text>
+                        </Col>
+                    </Row>
+                );
+            default:
+                return cellValue;
+        }
+    };
     return (
-        <div>
+        <>
             <Title text="Examenes pendientes" />
-
-            <div>
-                {
-                    appointmensToday.map((item, index) => {
-                        return (<AppointmentsView appointment={item} key={index} />)
-                    })
-                }
-            </div>
-
-        </div>
+            <Spacer y={1} x={2} />
+            <Table
+                aria-label="Example table with custom cells"
+                css={{ height: "auto", minWidth: "100%", }}
+                selectionMode="none"
+            >
+                <Table.Header columns={columns}>
+                    {(column) => (
+                        <Table.Column
+                            key={column.uid}
+                            hideHeader={column.uid === "actions"}
+                            align={column.uid === "actions" ? "center" : "start"}
+                        >
+                            {column.name}
+                        </Table.Column>
+                    )}
+                </Table.Header>
+                <Table.Body items={users}>
+                    {(item) => (
+                        <Table.Row>
+                            {(columnKey) => (
+                                <Table.Cell>{renderCell(item, columnKey)}</Table.Cell>
+                            )}
+                        </Table.Row>
+                    )}
+                </Table.Body>
+            </Table>
+        </>
     );
 }
