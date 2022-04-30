@@ -1,14 +1,25 @@
 import { Title } from "../../../components";
+import { AppointmentsView } from "./components/AppointmentsView/AppointmentsView";
 import { useExamenesPendientes } from "./useExamenesPendientes";
 
 export const ExamenesPendientes = () => {
 
-    useExamenesPendientes();
+    const {
+        appointmensToday,
+    } = useExamenesPendientes();
 
     return (
         <div>
             <Title text="Examenes pendientes" />
-            <p>Este es una prueba </p>
+
+            <div>
+                {
+                    appointmensToday.map((item, index) => {
+                        return (<AppointmentsView appointment={item} key={index} />)
+                    })
+                }
+            </div>
+
         </div>
     );
 }
