@@ -1,11 +1,10 @@
 import { Spacer } from '@nextui-org/react';
 import { MainButton, Title, Topbar } from '../../components';
 import Calendar from 'react-calendar';
+import { useState } from 'react';
+import { AppointmentCard, CreateAppoiment, Separator } from './components';
 import 'react-calendar/dist/Calendar.css';
 import './Appointments.css';
-import Separator from './components/separator.component';
-import AppointmentCard from './components/appointment-card.component';
-import { useState } from 'react';
 
 function cambiarFondo() {
   document.body.style = 'background: #f2fffe;';
@@ -15,6 +14,13 @@ function Appointments() {
   cambiarFondo();
 
   const [value, setValue] = useState(new Date());
+
+  const [visible, setVisible] = useState(false);
+  const handler = () => setVisible(true);
+  const closeHandler = () => {
+    setVisible(false);
+    console.log('closed');
+  };
 
   function onChange(nextValue) {
     console.log('calendar', nextValue);
@@ -32,11 +38,11 @@ function Appointments() {
       <main className="main-appointments">
         <div className="appointments-container">
           <Title text="Citas del dia" />
-          <MainButton text="Crear cita" width={200} />
+          <MainButton func={handler} text="Crear cita" width={200} />
         </div>
         <Spacer y={0.8} />
         <div className="appointments-container">
-          <Calendar onChange={onChange} value={value} />
+          <Calendar onChange={onChange} value={value} minDate={new Date()} />
           <div className="appointments-list">
             <Separator />
             <AppointmentCard />
@@ -51,6 +57,7 @@ function Appointments() {
           </div>
         </div>
       </main>
+      <CreateAppoiment visible={visible} closeHandler={closeHandler} />
     </>
   );
 }
