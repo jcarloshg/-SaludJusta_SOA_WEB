@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 import { createAdaptedUser } from "../../../adapters";
-import ExamsViewObject from "./models/ExamsViewObject";
+import { examsViewObject } from "./models";
 import { requestExamsToday } from "./services/requestExamsToday";
 
 export const useExamenesPendientes = () => {
 
     const [usersClients, setUsersClients] = useState([]);
-    const [examsViewObject, setExamsViewObject] = useState([]);
+    const [examsArryViewObject, setExamsArryViewObject] = useState([]);
 
     useEffect(() => {
         (async () => {
@@ -20,22 +20,23 @@ export const useExamenesPendientes = () => {
     useEffect(() => {
 
         if (usersClients.length === 0) return;
-        setExamsViewObject(
-            usersClients.map(
-                item => new ExamsViewObject({
-                    nameClient: `${item.name} ${item.lastName}`,
-                    hour: item.appointments[0].time,
-                    status: item.appointments[0].status,
-                    typeExam: item.appointments[0].exam.examCatalogItem.typeExam,
-                })
-            )
+
+        const auxusersClients = usersClients.map(
+            (item, index) => examsViewObject({
+                id: index, // ! this is important to render into table
+                nameClient: `${item.name} ${item.lastName}`,
+                hour: item.appointments[0].time,
+                status: item.appointments[0].status,
+                typeExam: item.appointments[0].exam.examCatalogItem.typeExam,
+            })
         );
+        setExamsArryViewObject(auxusersClients);
 
         return () => { }
     }, [usersClients]);
 
 
     return {
-        examsViewObject
+        examsArryViewObject
     }
 }
