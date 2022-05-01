@@ -1,8 +1,11 @@
 import { Table, Text, Spacer } from "@nextui-org/react";
-import { Title } from "../../../components";
+import { useNavigate } from "react-router-dom";
+import { SecondaryButton, Title } from "../../../components";
 import { useExamenesPendientes } from "./useExamenesPendientes";
 
 export const ExamenesPendientes = () => {
+
+    const navigate = useNavigate();
 
     const {
         examsArryViewObject
@@ -13,44 +16,24 @@ export const ExamenesPendientes = () => {
         { name: "Tipo examen", uid: "typeExam" },
         { name: "Hora", uid: "hour" },
         { name: "Estatus", uid: "status" },
-        { name: "", uid: "action" },
+        { name: "accion", uid: "action" },
     ];
 
     const render_customTable = (exam, columnKey) => {
         const cellValue = exam[columnKey];
         switch (columnKey) {
-
-            case "nameClient": return (
-                <Text size={14} css={{ tt: "capitalize" }}>
-                    {cellValue}
-                </Text>
-            )
-
-            case "typeExam": return (
-                <Text b size={14} css={{ tt: "capitalize" }}>
-                    {cellValue}
-                </Text>
-            )
-
-            case "hour": return (
-                <Text size={14} css={{ tt: "capitalize" }}>
-                    {cellValue}
-                </Text>
-            )
-
-            case "status": return (
-                <Text size={14} css={{ tt: "capitalize" }}>
-                    {cellValue}
-                </Text>
-            )
-
+            case "nameClient": return (<Text size={14} css={{ tt: "capitalize" }}> {cellValue} </Text>)
+            case "typeExam": return (<Text b size={14} css={{ tt: "capitalize" }}>{cellValue}</Text>)
+            case "hour": return (<Text size={14} css={{ tt: "capitalize" }}>{cellValue}</Text>)
+            case "status": return (<Text size={14} css={{ tt: "capitalize" }}>{cellValue}</Text>)
             case "action": return (
-                <Text size={14} css={{ tt: "capitalize" }}>[THIS IS A FUNCKING BUTTON]</Text>
+                <SecondaryButton
+                    func={() => navigate("/HomeExam/registrar_resultados")}
+                    text="registrar resultados"
+                />
             )
-
-            default: return cellValue;
+            // default: return cellValue;
         }
-
     }
 
     return (

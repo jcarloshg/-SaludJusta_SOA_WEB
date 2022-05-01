@@ -4,6 +4,7 @@ import { ExamenesPendientes } from "../ExamenesPendientes/ExamenesPendientes";
 import { Laboratorios } from "../Laboratorios/Laboratorios";
 import { MenuLeft } from "../../../components/MenuLeft/MenuLeft";
 import { ItemsMenu } from "./models/ItemsMenu";
+import { RegistrarResultados } from "../RegistrarResultados/RegistrarResultados";
 
 export function HomeExam(params) {
 
@@ -18,6 +19,7 @@ export function HomeExam(params) {
                     <Route path="*" element={<ExamenesPendientes />} />
                     <Route path="/examenesPendientes" element={<ExamenesPendientes />} />
                     <Route path="/laboratorios" element={<Laboratorios />} />
+                    <Route path="/registrar_resultados" element={<RegistrarResultados />} />
                 </Routes>
             </div>
 
