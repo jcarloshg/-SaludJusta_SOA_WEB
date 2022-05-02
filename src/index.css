@@ -29,3 +29,7 @@ body {
   border-color: red;
   border-style: solid;
 }
+
+.container{
+  padding: 20px;
+}

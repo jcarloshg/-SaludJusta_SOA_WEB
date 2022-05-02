@@ -1,7 +1,6 @@
 .box_info {
     display: flex;
     flex-direction: row;
-    width: 100%;
 }
 
 .box_info_person {
@@ -12,8 +11,14 @@
     flex: 1;
 }
 
-.renderData{
+.renderData {
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.buttons_actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
 }
