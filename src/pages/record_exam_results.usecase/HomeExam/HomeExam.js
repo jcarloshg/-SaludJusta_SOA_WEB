@@ -11,11 +11,11 @@ export function HomeExam(params) {
 
     return (
         <DataProvider>
-            <div className="border_generic container_menu_dashboard">
+            <div className="container_menu_dashboard">
 
                 <MenuLeft arrayItems={ItemsMenu} />
 
-                <div className="border_generic dashboard" >
+                <div className="dashboard" >
                     <Routes>
                         <Route path="/" element={<ExamenesPendientes />} />
                         <Route path="*" element={<ExamenesPendientes />} />
