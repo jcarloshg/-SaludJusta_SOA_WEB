@@ -2,21 +2,17 @@ import { Spacer } from '@nextui-org/react';
 import { MainButton, Title, Topbar } from '../../components';
 import Calendar from 'react-calendar';
 import { useState } from 'react';
-import { AppointmentCard, CreateAppoiment, Separator } from './components';
 import 'react-calendar/dist/Calendar.css';
 import './Appointments.css';
-
-function cambiarFondo() {
-  document.body.style = 'background: #f2fffe;';
-}
+import { AppointmentCard, Separator } from './components';
+import CreateAppoiment from './create-appoiment';
 
 function Appointments() {
-  cambiarFondo();
-
   const [value, setValue] = useState(new Date());
-
   const [visible, setVisible] = useState(false);
+
   const handler = () => setVisible(true);
+
   const closeHandler = () => {
     setVisible(false);
     console.log('closed');
@@ -32,13 +28,15 @@ function Appointments() {
       <Topbar showActions />
       <nav className="nav-bar">
         <div className="sidebar">
-          <Title text="Menú" />
+          <Title>Menú</Title>
         </div>
       </nav>
       <main className="main-appointments">
         <div className="appointments-container">
-          <Title text="Citas del dia" />
-          <MainButton func={handler} text="Crear cita" width={200} />
+          <Title>Citas del día</Title>
+          <MainButton func={handler} width="200px">
+            Crear cita
+          </MainButton>
         </div>
         <Spacer y={0.8} />
         <div className="appointments-container">

@@ -24,6 +24,11 @@ body {
   height: 100vh;
 }
 
+.nextui-c-eXOOPO {
+  border-radius: 8px;
+  background: white;
+}
+
 .border_generic {
   border-width: thin;
   border-color: red;

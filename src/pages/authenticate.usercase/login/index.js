@@ -32,7 +32,7 @@ function Login() {
           <Spacer y={1.6} />
           <InputPassword value={password} onChange={onChangePassword} />
           <Spacer y={1.6} />
-          <MainButton func={() => iniciarSesion_proof()} text="Iniciar sesión" />
+          <MainButton func={() => iniciarSesion_proof()}>Iniciar sesión</MainButton>
           <Spacer y={0.8} />
           <SecondaryButton text="Olvide mi contraseña" />
         </div>
