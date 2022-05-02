@@ -4,7 +4,7 @@ import { Title } from "../../../components"
 import { useRegistrarResultados } from "./useRegistrarResultados"
 import './RegistrarResultados.css';
 import { Spacer, Text } from "@nextui-org/react";
-import { dateToString } from "../../../utilities/date";
+import { dateToString, hhmmssToString } from "../../../utilities/date";
 import { timeToString } from "../../../utilities/date/timeToString";
 
 export const RegistrarResultados = () => {
@@ -54,7 +54,7 @@ export const RegistrarResultados = () => {
                         (user.appointments.length > 0) && (
                             <>
                                 {renderData('Fecha:', `${dateToString(new Date(user.appointments[0].date))}`)}
-                                {renderData('Hora:', `${timeToString(Date.parse(user.appointments[0].time))}`)}
+                                {renderData('Hora:', `${timeToString(hhmmssToString(user.appointments[0].time))}`)}
                             </>
                         )
                     }
