@@ -8,7 +8,7 @@ const axios = require('axios').default;
 export const markAppointmentAsComplete = async (idAppointment) => {
     try {
 
-        const url = `${process.env.REACT_APP_URL}${process.env.REACT_APP_API_EXAM}/markAppointmentAsComplete`;
+        const url = `${process.env.REACT_APP_URL}${process.env.REACT_APP_API_APPOINTMENT}/markAppointmentAsComplete`;
 
         const params = new URLSearchParams();
         params.append('idAppointment', idAppointment);

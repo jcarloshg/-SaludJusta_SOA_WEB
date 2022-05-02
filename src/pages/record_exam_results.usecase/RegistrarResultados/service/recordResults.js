@@ -3,7 +3,7 @@ const axios = require('axios').default;
 
 /**
  *
- * @param {string} idExam*
+ * @param {string} idExam
  * @param {string} results
  * @returns
  */
