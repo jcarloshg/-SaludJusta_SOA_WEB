@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import './HomeExam.css';
 import { ExamenesPendientes } from "../ExamenesPendientes/ExamenesPendientes";
-import { Laboratorios } from "../Laboratorios/Laboratorios";
+import { Laboratorios } from "../../common/Laboratorios/Laboratorios";
 import { MenuLeft } from "../../../components/MenuLeft/MenuLeft";
 import { ItemsMenu } from "./models/ItemsMenu";
 import { RegistrarResultados } from "../RegistrarResultados/RegistrarResultados";
