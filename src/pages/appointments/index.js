@@ -1,5 +1,5 @@
 import { Spacer } from '@nextui-org/react';
-import { MainButton, Title, Topbar } from '../../components';
+import { MainButton, Title } from '../../components';
 import Calendar from 'react-calendar';
 import { useState } from 'react';
 import 'react-calendar/dist/Calendar.css';
@@ -25,12 +25,12 @@ function Appointments() {
 
   return (
     <>
-      <Topbar showActions />
-      <nav className="nav-bar">
+      {/* <Topbar showActions /> */}
+      {/* <nav className="nav-bar">
         <div className="sidebar">
           <Title>Menú</Title>
         </div>
-      </nav>
+      </nav> */}
       <main className="main-appointments">
         <div className="appointments-container">
           <Title>Citas del día</Title>

@@ -1,5 +1,5 @@
 import { Text } from '@nextui-org/react';
-import './Separator.css';
+import './separator.css';
 
 function Separator({ time = '10:00 am' }) {
   return (
