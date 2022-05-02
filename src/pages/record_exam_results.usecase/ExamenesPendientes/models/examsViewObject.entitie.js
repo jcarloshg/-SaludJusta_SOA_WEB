@@ -15,6 +15,7 @@
 
 export const examsViewObject = ({
     id = null, // ! this is important to render into table
+    idExam = null,
     nameClient = null,
     typeExam = null,
     hour = null,
@@ -22,6 +23,7 @@ export const examsViewObject = ({
 }) => {
     return {
         id: id,
+        idExam: idExam,
         nameClient: nameClient,
         typeExam: typeExam,
         hour: hour,

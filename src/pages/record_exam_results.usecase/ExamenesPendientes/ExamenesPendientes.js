@@ -1,14 +1,12 @@
 import { Table, Text, Spacer } from "@nextui-org/react";
-import { useNavigate } from "react-router-dom";
 import { SecondaryButton, Title } from "../../../components";
 import { useExamenesPendientes } from "./useExamenesPendientes";
 
 export const ExamenesPendientes = () => {
 
-    const navigate = useNavigate();
-
     const {
-        examsArryViewObject
+        examsArryViewObject,
+        goToRegistrarResultados
     } = useExamenesPendientes();
 
     const columns_customTable = [
@@ -28,11 +26,11 @@ export const ExamenesPendientes = () => {
             case "status": return (<Text size={14} css={{ tt: "capitalize" }}>{cellValue}</Text>)
             case "action": return (
                 <SecondaryButton
-                    func={() => navigate("/HomeExam/registrar_resultados")}
+                    func={() => goToRegistrarResultados(exam.idExam)}
                     text="registrar resultados"
                 />
             )
-            // default: return cellValue;
+            default: return cellValue;
         }
     }
 

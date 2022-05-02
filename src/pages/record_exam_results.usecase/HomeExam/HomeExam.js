@@ -5,24 +5,27 @@ import { Laboratorios } from "../Laboratorios/Laboratorios";
 import { MenuLeft } from "../../../components/MenuLeft/MenuLeft";
 import { ItemsMenu } from "./models/ItemsMenu";
 import { RegistrarResultados } from "../RegistrarResultados/RegistrarResultados";
+import { DataProvider } from "./contexts/DataContext";
 
 export function HomeExam(params) {
 
     return (
-        <div className="border_generic container_menu_dashboard">
+        <DataProvider>
+            <div className="border_generic container_menu_dashboard">
 
-            <MenuLeft arrayItems={ItemsMenu} />
+                <MenuLeft arrayItems={ItemsMenu} />
 
-            <div className="border_generic dashboard" >
-                <Routes>
-                    <Route path="/" element={<ExamenesPendientes />} />
-                    <Route path="*" element={<ExamenesPendientes />} />
-                    <Route path="/examenesPendientes" element={<ExamenesPendientes />} />
-                    <Route path="/laboratorios" element={<Laboratorios />} />
-                    <Route path="/registrar_resultados" element={<RegistrarResultados />} />
-                </Routes>
+                <div className="border_generic dashboard" >
+                    <Routes>
+                        <Route path="/" element={<ExamenesPendientes />} />
+                        <Route path="*" element={<ExamenesPendientes />} />
+                        <Route path="/examenesPendientes" element={<ExamenesPendientes />} />
+                        <Route path="/registrar_resultados" element={<RegistrarResultados />} />
+                        <Route path="/laboratorios" element={<Laboratorios />} />
+                    </Routes>
+                </div>
+
             </div>
-
-        </div>
+        </DataProvider>
     );
 }

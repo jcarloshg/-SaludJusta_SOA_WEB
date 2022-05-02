@@ -1,0 +1,18 @@
+.box_info {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.box_info_person {
+    flex: 1;
+}
+
+.box_info_appointment {
+    flex: 1;
+}
+
+.renderData{
+    display: flex;
+    flex-direction: row;
+}
