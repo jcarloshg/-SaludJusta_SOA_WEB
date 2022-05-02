@@ -5,7 +5,7 @@ const theme = createTheme({
   theme: {
     colors: {
       // generic colors
-      white: '#F2FFFE',
+      white: '#FAFFFE',
       black: '#001917',
       //semantic colors
       green100: '#EBFFFD',

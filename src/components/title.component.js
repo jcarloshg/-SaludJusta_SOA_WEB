@@ -1,9 +1,9 @@
 import { Text } from '@nextui-org/react';
 
-function Title({ text = '' }) {
+function Title({ children }) {
   return (
-    <Text h1 size={24} color="primary" weight="bold">
-      {text}
+    <Text h1 size={24} color="primary" weight="medium">
+      {children}
     </Text>
   );
 }

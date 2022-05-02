@@ -1,0 +1,22 @@
+.appointments-container {
+  width: 100%;
+}
+
+.appointments-actions {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.appointments-calendar {
+  width: 30%;
+  padding: 0.5rem;
+}
+
+.appointments-list {
+  width: 70%;
+  padding: 0.5rem;
+}
+
+.nextui-c-PJLV-ieGWYFU-css {
+  margin: 0;
+}
