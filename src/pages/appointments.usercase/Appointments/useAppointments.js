@@ -37,14 +37,14 @@ export const useAppointments = () => {
                 typeExam: item.appointments[0].exam.examCatalogItem.typeExam,
             })
         );
-
-        console.log(auxusersClients);
+        setAppointmentsArryView(auxusersClients);
 
         return () => { }
     }, [usersClients])
 
 
     return {
+        appointmentsArryView,
         date, onChange
     }
 }
