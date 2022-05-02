@@ -1,27 +1,17 @@
 
 import Calendar from 'react-calendar';
-import { useState } from 'react';
-import CreateAppoiment from './create-appoiment';
 import AppointmentsTable from './components/appointments-table.component';
 import 'react-calendar/dist/Calendar.css';
 import './appointments.css';
 import { MainButton, Title } from '../../../components';
+import { Spacer } from '@nextui-org/react';
+import { useAppointments } from './useAppointments';
 
 function Appointments() {
-  const [value, setValue] = useState(new Date());
-  const [visible, setVisible] = useState(false);
 
-  const handler = () => setVisible(true);
-
-  const closeHandler = () => {
-    setVisible(false);
-    console.log('closed');
-  };
-
-  function onChange(nextValue) {
-    console.log('calendar', nextValue);
-    setValue(nextValue);
-  }
+  const {
+    date, onChange
+  } = useAppointments();
 
   const columns = [
     { name: 'Name', uid: 'name' },
@@ -81,20 +71,19 @@ function Appointments() {
   ];
 
   return (
-    <>
+    <div className='container'>
       <main className="row">
 
         <article className="appointments-container">
           <section className="row space-between center appointments-actions">
             <Title>Citas del día</Title>
-            <MainButton func={handler} width="200px">
-              Crear cita
-            </MainButton>
+            <MainButton func={() => console.log("Crear cita")} width="200px">Crear cita</MainButton>
           </section>
 
+          <Spacer y={1} x={2} />
           <section className="row space-between flex-start">
             <section className="appointments-calendar">
-              <Calendar onChange={onChange} value={value} minDate={new Date()} />
+              <Calendar onChange={onChange} value={date} minDate={new Date()} />
             </section>
 
             <section className="appointments-list">
@@ -103,8 +92,7 @@ function Appointments() {
           </section>
         </article>
       </main>
-      <CreateAppoiment visible={visible} closeHandler={closeHandler} />
-    </>
+    </div>
   );
 }
 
