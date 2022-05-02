@@ -3,9 +3,9 @@
 }
 
 .login-container {
-  background: #f2fffe;
+  background: #ffffff;
   border-radius: 1rem;
-  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.16);
+  box-shadow: 0 0 1rem #c1c1c1;
   padding: 4.5rem 2.5rem;
   max-width: 30rem;
   display: flex;

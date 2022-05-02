@@ -2,7 +2,7 @@ import Login from './pages/authenticate.usercase/login';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import { HomeExam } from './pages/record_exam_results.usecase/HomeExam/HomeExam';
-import Appointments from './pages/appointments';
+import Appointments from './pages/appointments.usercase';
 
 function App() {
   return (

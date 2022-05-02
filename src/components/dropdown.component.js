@@ -1,11 +1,13 @@
 import './dropdown.css';
 
+const { log } = console;
+
 function Dropdown({
   fullWidth = false,
   label = '',
   value = '',
   options = [],
-  onChange = () => {},
+  onChange = () => log('onChange not defined'),
 }) {
   return (
     <label className="dropdown-label">
