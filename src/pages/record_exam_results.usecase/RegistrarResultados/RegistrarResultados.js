@@ -12,7 +12,7 @@ export const RegistrarResultados = () => {
     const {
         user,
         bindings,
-        saveResults
+        saveResults, cancel
     } = useRegistrarResultados();
 
     /**
@@ -77,6 +77,7 @@ export const RegistrarResultados = () => {
             <Textarea
                 {...bindings}
                 shadow={false}
+                rows={10}
                 label="Infresa los resultados obtenidos de las muestras"
                 css={{ width: "100%" }}
             />
@@ -85,6 +86,7 @@ export const RegistrarResultados = () => {
             <div className="buttons_actions">
                 <SecondaryButton
                     text="Cancelar"
+                    func={() => cancel()}
                 />
                 <MainButton
                     func={() => saveResults()}

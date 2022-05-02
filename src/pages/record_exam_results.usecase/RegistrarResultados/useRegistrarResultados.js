@@ -1,11 +1,14 @@
 import { useInput } from '@nextui-org/react';
 import React, { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import User from '../../../models/User.entitie';
 import { DataContext } from '../HomeExam/contexts/DataContext';
 
 export const useRegistrarResultados = () => {
 
     const { data } = useContext(DataContext);
+
+    const navigate = useNavigate();
 
     const [user, setUser] = useState(new User({}));
 
@@ -23,13 +26,11 @@ export const useRegistrarResultados = () => {
         console.log(controlledValue);
     }
 
-    const cancel = () => {
-        console.log(controlledValue);
-    }
+    const cancel = () => navigate("../");
 
     return {
         user,
         bindings,
-        saveResults
+        saveResults, cancel
     };
 }
