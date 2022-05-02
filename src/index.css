@@ -55,6 +55,14 @@ body {
   justify-content: space-evenly;
 }
 
+.justify-flex-start {
+  justify-content: flex-start;
+}
+
+.justify-flex-end {
+  justify-content: flex-end;
+}
+
 .center {
   align-items: center;
 }
@@ -69,4 +77,17 @@ body {
 
 .justify-content-center {
   justify-content: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.full-size {
+  width: 100%;
+  height: 100%;
 }

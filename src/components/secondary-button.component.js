@@ -1,14 +1,13 @@
 import { Button } from '@nextui-org/react';
 
 function SecondaryButton({ func = null, text = '', width = 250 }) {
-
   const executeFuntion = () => {
     try {
       func();
     } catch (error) {
       console.log(`[MainButton] -> `, error);
     }
-  }
+  };
 
   return (
     <Button
@@ -16,8 +15,8 @@ function SecondaryButton({ func = null, text = '', width = 250 }) {
       css={{
         borderRadius: '8px',
         color: '#0AB68B',
-        border: '1px solid #F2FFFE',
-        backgroundColor: '#F2FFFE',
+        border: '1px solid #EAEAEA',
+        backgroundColor: '#FFFFFF',
         width: `${width}px`,
       }}
     >

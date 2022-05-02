@@ -1,0 +1,15 @@
+.create-appointment-main {
+  padding: 1rem 16rem;
+}
+
+.create-appointment-container {
+  padding: 2rem 4rem;
+  border: 1px solid #ccc;
+  border-radius: 16px;
+}
+
+.select-appointment-container {
+  padding: 3rem 6rem;
+  border: 1px solid #ccc;
+  border-radius: 32px;
+}
