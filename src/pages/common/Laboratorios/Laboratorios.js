@@ -1,4 +1,4 @@
-import { Card, Grid, Row, Spacer, Text } from "@nextui-org/react";
+import { Card, Grid, Spacer, Text } from "@nextui-org/react";
 import { Title } from "../../../components";
 import { laboratorios } from "./models/laboratorios";
 import { AiOutlineEnvironment, AiOutlinePhone } from "react-icons/ai";

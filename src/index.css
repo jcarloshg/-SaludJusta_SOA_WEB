@@ -6,6 +6,18 @@ body {
   background-color: #fff;
 }
 
+.container_menu_dashboard {
+  display: flex;
+  flex-direction: row;
+  height: 92vh;
+  width: 100%;
+}
+
+.dashboard {
+  width: 80%;
+  padding: 10px;
+}
+
 .nextui-c-eXOOPO {
   border-radius: 8px;
   background: #fff;

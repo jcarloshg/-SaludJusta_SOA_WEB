@@ -1,5 +1,5 @@
 import { Input, Spacer } from '@nextui-org/react';
-import { Dropdown, Subtitle } from '../../components';
+import { Dropdown, Subtitle } from '../../../components';
 import { AppointmentInput, AppointmentInputAge, AppointmentModal } from './components';
 
 const { log } = console;

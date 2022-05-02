@@ -11,4 +11,4 @@ export const ItemsMenu = [
         label: "Laboratorios",
         destino: "/HomeExam/laboratorios"
     }
-]
+];

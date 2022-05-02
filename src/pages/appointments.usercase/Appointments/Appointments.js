@@ -1,20 +1,11 @@
-import { MainButton, Title } from '../../components';
+
 import Calendar from 'react-calendar';
 import { useState } from 'react';
 import CreateAppoiment from './create-appoiment';
-import { MenuLeft } from '../../components/MenuLeft/MenuLeft';
 import AppointmentsTable from './components/appointments-table.component';
-import { useAsyncList } from '@nextui-org/react';
 import 'react-calendar/dist/Calendar.css';
 import './appointments.css';
-
-const ItemsMenu = [
-  {
-    icon: '[ICON]',
-    label: 'Citas',
-    destino: '/Appointments',
-  },
-];
+import { MainButton, Title } from '../../../components';
 
 function Appointments() {
   const [value, setValue] = useState(new Date());
@@ -92,7 +83,6 @@ function Appointments() {
   return (
     <>
       <main className="row">
-        <MenuLeft arrayItems={ItemsMenu} />
 
         <article className="appointments-container">
           <section className="row space-between center appointments-actions">

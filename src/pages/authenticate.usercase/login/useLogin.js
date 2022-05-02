@@ -11,8 +11,8 @@ export const useLogin = () => {
 
     const iniciarSesion_proof = async () => {
 
-        const emailExample = "richie@email.com";
-        const passwordExample = "richie123";
+        const emailExample = "luis@email.com";
+        const passwordExample = "luis123";
 
         const resExistAccount = await existAccount(emailExample);
 
@@ -22,7 +22,7 @@ export const useLogin = () => {
         const resLoggin = await loggin(emailExample, passwordExample);
         const employe = resExistAccount ? createAdaptedUser(resLoggin.data) : null;
 
-        if (employe.role === USER_ROLE.RECEPTIONIST) console.log(employe.role);
+        if (employe.role === USER_ROLE.RECEPTIONIST) navigate('HomeAppointments');
         if (employe.role === USER_ROLE.LAB_TECHNICIAN) navigate('HomeExam');
 
     }

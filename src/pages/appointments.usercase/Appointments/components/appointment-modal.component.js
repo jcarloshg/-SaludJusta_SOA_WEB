@@ -1,5 +1,5 @@
 import { Modal, Row } from '@nextui-org/react';
-import { ErrorButton, MainButton, Title } from '../../../components';
+import { ErrorButton, MainButton, Title } from '../../../../components';
 import './appointment-modal.css';
 
 function AppointmentModal({ open, onClose, onSave, title, children }) {

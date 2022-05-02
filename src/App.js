@@ -2,8 +2,8 @@ import Login from './pages/authenticate.usercase/login';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import { HomeExam } from './pages/record_exam_results.usecase/HomeExam/HomeExam';
-import Appointments from './pages/appointments.usercase';
 import { Topbar } from './components';
+import { HomeAppointments } from './pages/appointments.usercase/HomeAppointments/HomeAppointments';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="*" element={<Login />} />
           <Route path="HomeExam/*" element={<HomeExam />} />
-          <Route path="/Appointments/*" element={<Appointments />} />
+          <Route path="HomeAppointments/*" element={<HomeAppointments />} />
         </Routes>
       </BrowserRouter>
     </>
