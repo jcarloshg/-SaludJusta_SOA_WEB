@@ -35,8 +35,8 @@ export const ExamenesPendientes = () => {
     }
 
     return (
-        <>
-            <Title text="Examenes pendientes" />
+        <div className="container">
+            <Title>Examenes pendientes</Title>
 
             <Spacer y={1} x={2} />
             <Table
@@ -61,6 +61,6 @@ export const ExamenesPendientes = () => {
                 </Table.Body>
 
             </Table>
-        </>
+        </div>
     );
 }

@@ -1,11 +1,13 @@
+import { AiFillSnippets, AiFillExperiment } from "react-icons/ai";
+
 export const ItemsMenu = [
     {
-        icon: "[ICON]",
+        icon: (<AiFillSnippets />),
         label: "Exmenes pendientes",
         destino: "/HomeExam/examenesPendientes"
     },
     {
-        icon: "[ICON]",
+        icon: (<AiFillExperiment />),
         label: "Laboratorios",
         destino: "/HomeExam/laboratorios"
     }

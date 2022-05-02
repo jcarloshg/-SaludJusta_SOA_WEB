@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import './MenuItem.css';
 
 export const MenuItem = ({
-    icon = "",
+    icon = null,
     label = "",
     destino = "",
 }) => {
@@ -19,7 +19,8 @@ export const MenuItem = ({
             onClick={() => navigateTo()}
             auto css={{ width: '100%', justifyContent: 'left' }}
         >
-            <p style={{ fontSize: 14 }}>[O]</p>
+            {icon}
+            {/* <p style={{ fontSize: 14 }}>[O]</p> */}
             <Spacer x={0.5} />
             <p style={{ fontSize: 14 }}>{label}</p>
         </Button>

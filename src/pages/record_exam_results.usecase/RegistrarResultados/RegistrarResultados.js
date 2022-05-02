@@ -1,6 +1,7 @@
 
 import React from "react"
-import { MainButton, SecondaryButton, Title } from "../../../components"
+import { MainButton, SecondaryButton } from "../../../components"
+import Title from '../../../components/title.component'
 import { useRegistrarResultados } from "./useRegistrarResultados"
 import './RegistrarResultados.css';
 import { Spacer, Text, Textarea } from "@nextui-org/react";
@@ -36,7 +37,10 @@ export const RegistrarResultados = () => {
 
     return (
         <div className="container">
-            <Title text="Registrar Resultados" />
+            {/* <Title text="Registrar Resultados" /> */}
+            <Spacer y={1.5} />
+
+            <Title>Registrar resultados</Title>
 
             <Spacer y={1.5} />
             <div>
@@ -76,7 +80,8 @@ export const RegistrarResultados = () => {
             <Spacer y={0.5} />
             <Textarea
                 {...bindings}
-                shadow={false}
+                bordered
+                shadow={true}
                 rows={10}
                 label="Infresa los resultados obtenidos de las muestras"
                 css={{ width: "100%" }}
@@ -88,10 +93,7 @@ export const RegistrarResultados = () => {
                     text="Cancelar"
                     func={() => cancel()}
                 />
-                <MainButton
-                    func={() => saveResults()}
-                    text="Guardar"
-                />
+                <MainButton func={() => saveResults()}>Guardar</MainButton>
             </div>
 
             {/* <p>{JSON.stringify(user, null, 2)}</p> */}

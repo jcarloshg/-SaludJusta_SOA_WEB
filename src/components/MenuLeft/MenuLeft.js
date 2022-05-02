@@ -7,7 +7,7 @@ export const MenuLeft = ({ arrayItems = [] }) => {
 
     return (
         <div className="menu_left">
-            <Subtitle text="Menú" />
+            <Subtitle>Menú</Subtitle>
             <Spacer y={0.5} />
             <div>
                 {
