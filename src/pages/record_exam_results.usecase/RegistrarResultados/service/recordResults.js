@@ -5,6 +5,7 @@ const axios = require('axios').default;
  *
  * @param {string} idExam*
  * @param {string} results
+ * @returns
  */
 export const recordResults = async (idExam, results) => {
     try {
@@ -17,7 +18,7 @@ export const recordResults = async (idExam, results) => {
         return await axios.put(url, params);
 
     } catch (error) {
-        console.log(`[recordResults] -> `, error);
-        return null;
+        // console.log(`[recordResults] -> `, error);
+        return error.response;
     }
 }

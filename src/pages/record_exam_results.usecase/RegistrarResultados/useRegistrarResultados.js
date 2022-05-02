@@ -31,10 +31,14 @@ export const useRegistrarResultados = () => {
         const idExam = user.appointments[0].exam.idExam;
         const resRecordResults = await recordResults(idExam, controlledValue);
 
-        const exam = examAdapter(resRecordResults.data.data);
+        if (resRecordResults.data.isOk) {
+            const exam = examAdapter(resRecordResults.data.data);
 
-        console.log(`[resRecordResults] -> `, resRecordResults);
-        console.log(`[exam] -> `, exam);
+            // ! TODO add markAppointmentAsComplete
+            console.log(exam);
+        } else {
+            console.log(resRecordResults.data);
+        }
 
     }
 
