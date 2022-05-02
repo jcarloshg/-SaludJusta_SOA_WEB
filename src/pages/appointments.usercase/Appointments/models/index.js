@@ -1,0 +1,1 @@
+export * from './appointmentViewObject.entitie';
