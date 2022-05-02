@@ -1,19 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Appointment from '../../../models/Appointment.entitie';
+import User from '../../../models/User.entitie';
 import { DataContext } from '../HomeExam/contexts/DataContext';
 
 export const useRegistrarResultados = () => {
 
     const { data } = useContext(DataContext);
 
-    const [appointment, setAppointment] = useState(new Appointment({}));
+    const [user, setUser] = useState(new User({}));
 
     useEffect(() => {
         // ! if not exist this condition the progam die D:
-        setAppointment(new Appointment(data.appointments[0]));
+        if (data.idUser === null) return;
+        setUser(new User(data));
     }, []);
 
     return {
-        appointment,
+        user,
     };
 }
