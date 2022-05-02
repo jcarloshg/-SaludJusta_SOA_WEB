@@ -17,6 +17,10 @@ body {
   border-style: solid;
 }
 
+.container {
+  padding: 20px;
+}
+
 .row {
   display: flex;
   flex-direction: row;
