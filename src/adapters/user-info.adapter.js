@@ -1,6 +1,6 @@
 import { EndpointUser, UserInfo } from '../models';
 
-const defaultUser = new EndpointUser();
+const defaultUser = new EndpointUser({});
 
 function createAdaptedUserInfo(endpointUser = defaultUser) {
   return new UserInfo(
