@@ -5,11 +5,11 @@ export const ItemsMenu = [
     {
         icon: (<AiOutlineFileDone />),
         label: 'Citas',
-        destino: '/Appointments',
+        destino: '/HomeAppointments/',
     },
     {
         icon: (<AiFillExperiment />),
         label: "Laboratorios",
-        destino: "/HomeExam/laboratorios"
+        destino: "/HomeAppointments/laboratorios"
     }
 ];
