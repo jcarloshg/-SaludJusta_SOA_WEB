@@ -3,7 +3,7 @@ import React from "react"
 import { MainButton, SecondaryButton, Title } from "../../../components"
 import { useRegistrarResultados } from "./useRegistrarResultados"
 import './RegistrarResultados.css';
-import { Input, Spacer, Text, Textarea } from "@nextui-org/react";
+import { Spacer, Text, Textarea } from "@nextui-org/react";
 import { dateToString, hhmmssToString } from "../../../utilities/date";
 import { timeToString } from "../../../utilities/date/timeToString";
 

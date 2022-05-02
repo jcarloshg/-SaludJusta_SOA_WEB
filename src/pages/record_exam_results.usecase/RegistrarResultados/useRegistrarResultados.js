@@ -1,8 +1,10 @@
 import { useInput } from '@nextui-org/react';
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { examAdapter } from '../../../adapters/exam.adapter';
 import User from '../../../models/User.entitie';
 import { DataContext } from '../HomeExam/contexts/DataContext';
+import { recordResults } from './service/recordResults';
 
 export const useRegistrarResultados = () => {
 
@@ -13,7 +15,9 @@ export const useRegistrarResultados = () => {
     const [user, setUser] = useState(new User({}));
 
     const {
-        value: controlledValue, setValue: setControlledValue, reset, bindings,
+        value: controlledValue,
+        // setValue: setControlledValue,
+        bindings,
     } = useInput("");
 
     useEffect(() => {
@@ -22,8 +26,16 @@ export const useRegistrarResultados = () => {
         setUser(new User(data));
     }, []);
 
-    const saveResults = () => {
-        console.log(controlledValue);
+    const saveResults = async () => {
+
+        const idExam = user.appointments[0].exam.idExam;
+        const resRecordResults = await recordResults(idExam, controlledValue);
+
+        const exam = examAdapter(resRecordResults.data.data);
+
+        console.log(`[resRecordResults] -> `, resRecordResults);
+        console.log(`[exam] -> `, exam);
+
     }
 
     const cancel = () => navigate("../");
