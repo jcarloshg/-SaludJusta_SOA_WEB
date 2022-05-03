@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import requesExamTypes from '../services/requesExamTypes';
+import { getAvailableHoursDay, requesExamTypes } from '../services';
 
 // const availableSchedules = [
 // {
@@ -52,8 +52,12 @@ function useCreateAppointment() {
     setTypeOfExams(event.target.value);
   };
 
-  const onChangeDate = (event) => {
+  const onChangeDate = async (event) => {
     setDate(event);
+    const dateStr = event.toISOString().slice(0, 10);
+    console.log(`[onChangeDate] -> `, typeOfExams, dateStr);
+    const res = await getAvailableHoursDay(typeOfExams, dateStr);
+    console.log(`[res] -> `, res);
   };
 
   return {

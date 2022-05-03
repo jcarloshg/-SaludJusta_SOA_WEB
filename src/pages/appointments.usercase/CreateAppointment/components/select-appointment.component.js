@@ -29,7 +29,7 @@ function SelectAppointment({
             Fecha
           </Text>
           <Spacer y={0.2} />
-          <DatePicker onChange={onChangeDate} value={date} clearIcon={null} minDate={new Date()} />
+          <DatePicker onChange={onChangeDate} value={date} clearIcon={null} />
         </div>
       </div>
       <Spacer y={1} />
