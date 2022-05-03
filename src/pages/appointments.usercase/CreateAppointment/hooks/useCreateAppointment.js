@@ -1,12 +1,5 @@
 import { useEffect, useState } from 'react';
-
-// const typesOfExams = [
-//   { value: 'AUDIOMETRÍA', label: 'Audiometría' },
-//   { value: 'MASTOGRAFÍA', label: 'Mastografía' },
-//   { value: 'ESPIROMETRÍA', label: 'Espirometría' },
-//   { value: 'PERFIL TRIODE', label: 'Perfil Triode' },
-//   { value: 'BIOMETRÍA HEMÁTICA', label: 'Biométrica Hemática' },
-// ];
+import requesExamTypes from '../services/requesExamTypes';
 
 // const availableSchedules = [
 // {
@@ -23,6 +16,8 @@ import { useEffect, useState } from 'react';
 // },
 // ];
 
+const capitalize = (str) => `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
+
 function useCreateAppointment() {
   const [email, setEmail] = useState('');
   const [typeOfExams, setTypeOfExams] = useState('AUDIOMETRÍA');
@@ -30,11 +25,30 @@ function useCreateAppointment() {
   const [date, setDate] = useState(new Date());
   const [availableSchedules, setAvailableSchedules] = useState([]);
 
+  useEffect(() => {
+    const fetchTypesOfExams = async () => {
+      const res = await requesExamTypes();
+      console.log(`[typos] -> `, res);
+
+      if (res !== null) {
+        const types = res.data.map((type) => ({
+          value: type.typeExam,
+          label: capitalize(type.typeExam.toLowerCase()),
+        }));
+
+        setTypesOfExams(types);
+      }
+    };
+
+    fetchTypesOfExams();
+  }, []);
+
   const onChangeEmail = (event) => {
     setEmail(event.target.value);
   };
 
   const onChangeTypeOfExam = (event) => {
+    console.log(`[onChangeTypeOfExam] -> `, event.target.value);
     setTypeOfExams(event.target.value);
   };
 
