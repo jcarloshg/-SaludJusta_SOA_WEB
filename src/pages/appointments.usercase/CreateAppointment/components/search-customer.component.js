@@ -5,25 +5,31 @@ function SearchCustomer({ email = '', onChangeEmail, onSearchCustomer, onCreateC
   return (
     <article className="col full-width create-appointment-container">
       <Title>Crear Cita</Title>
-      <Spacer y={0.4} />
       <Subtitle>Buscar cliente por correo</Subtitle>
-      <Spacer y={1.2} />
-      <Input
-        label="Correo"
-        placeholder="correo@ejemplo.com"
-        value={email}
-        onChange={onChangeEmail}
-        autoComplete="off"
-        bordered
-        clearable
-        color="primary"
-      />
-      <Spacer y={1.6} />
-      <section className="row justify-flex-end">
-        <SecondaryButton text="Crear nuevo" func={onCreateCustomer} />
-        <Spacer x={0.8} />
-        <MainButton func={onSearchCustomer}>Buscar</MainButton>
-      </section>
+      <Spacer y={1} />
+      {/* <section className="row justify-flex-end"> */}
+      {/* <SecondaryButton text="Crear nuevo" func={onCreateCustomer} width="500px" /> */}
+      {/* <Spacer x={0.8} /> */}
+      <div className="col center">
+        <Input
+          label="Correo electrónico"
+          placeholder="correo@ejemplo.com"
+          value={email}
+          onChange={onChangeEmail}
+          autoComplete="off"
+          bordered
+          clearable
+          color="primary"
+          css={{ width: '330px' }}
+        />
+        <Spacer y={1} />
+        <MainButton func={onSearchCustomer} width="330px">
+          Buscar
+        </MainButton>
+        <Spacer y={0.5} />
+        <SecondaryButton text="Crear nuevo cliente" func={onCreateCustomer} width="330px" />
+      </div>
+      {/* </section> */}
     </article>
   );
 }

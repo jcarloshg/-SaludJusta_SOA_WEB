@@ -1,3 +1,4 @@
+import uid from '../utilities/uid';
 import './dropdown.css';
 
 const { log } = console;
@@ -18,7 +19,7 @@ function Dropdown({
         onChange={onChange}
       >
         {options.map((option) => (
-          <option className="dropdown-option" key={option.value} value={option.value}>
+          <option className="dropdown-option" key={uid()} value={option.value}>
             {option.label}
           </option>
         ))}

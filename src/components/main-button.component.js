@@ -1,6 +1,6 @@
 import { Button } from '@nextui-org/react';
 
-function MainButton({ func = null, width = '250px', children }) {
+function MainButton({ func = null, width = '200px', children }) {
   const executeFuntion = () => {
     try {
       func();
@@ -13,9 +13,10 @@ function MainButton({ func = null, width = '250px', children }) {
     <Button
       onClick={() => executeFuntion()}
       css={{
-        borderRadius: '8px',
         width: width,
-        // fontSize: '1rem',
+        borderRadius: '0.5rem',
+        fontSize: '0.875rem',
+        padding: '1.2rem 2.4rem',
       }}
       color="primary"
       shadow

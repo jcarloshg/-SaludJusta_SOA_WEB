@@ -1,40 +1,42 @@
-import { Input, Spacer } from '@nextui-org/react';
-import { Dropdown, ErrorButton, MainButton, Subtitle, Title } from '../../../../components';
+import { Spacer, Text } from '@nextui-org/react';
+import DatePicker from 'react-date-picker';
+import { Dropdown, Subtitle, Title } from '../../../../components';
+import AvailableAppointments from './available-appointments.component';
 
-const { log } = console;
-
-const options = [
-  { label: 'Fruit', value: 'fruit' },
-  { label: 'Vegetable', value: 'vegetable' },
-  { label: 'Meat', value: 'meat' },
-];
-
-function SelectAppointment() {
+function SelectAppointment({
+  typesOfExams,
+  typeOfExam,
+  onChangeTypeOfExam,
+  date,
+  onChangeDate,
+  availableSchedules,
+}) {
   return (
     <article className="col full-width select-appointment-container">
       <Title>Crear Cita</Title>
-      <Spacer y={0.4} />
       <Subtitle>Selecciona el tipo de examan, la hora y la fecha.</Subtitle>
-      <Spacer y={0.4} />
-      <Dropdown
-        fullWidth
-        label="Tipo de examen"
-        options={options}
-        value=""
-        onChange={() => log('onChange not defined')}
-      />
+      <div className="col center full-width">
+        <Dropdown
+          fullWidth
+          label="Tipo de examen"
+          options={typesOfExams}
+          value={typeOfExam}
+          onChange={onChangeTypeOfExam}
+        />
+        <Spacer y={1} />
+        <div>
+          <Text size={16} color="#028174" weight="medium">
+            Fecha
+          </Text>
+          <Spacer y={0.2} />
+          <DatePicker onChange={onChangeDate} value={date} clearIcon={null} minDate={new Date()} />
+        </div>
+      </div>
       <Spacer y={1} />
       <Subtitle>Horarios disponibles</Subtitle>
-      <Spacer y={1} />
-      <Input bordered fullWidth label="Fecha" type="date" color="primary" min={new Date()} />
-      <Spacer y={1} />
-      <Input bordered fullWidth label="Hora" type="time" color="primary" />
-      <Spacer y={1} />
-      <section className="row justify-flex-end">
-        <MainButton>Guardar cita</MainButton>
-        <Spacer x={0.8} />
-        <ErrorButton>Cancelar</ErrorButton>
-      </section>
+      <div className="full-width col center">
+        <AvailableAppointments list={availableSchedules} />
+      </div>
     </article>
   );
 }
