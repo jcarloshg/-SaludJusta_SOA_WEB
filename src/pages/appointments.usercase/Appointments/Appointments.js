@@ -13,7 +13,9 @@ function Appointments() {
 
   const {
     appointmentsArryView,
-    date, onChange
+    date, onChange,
+    isVisibleModal, setIsVisibleModal,
+    selectUser, selectedUser
   } = useAppointments();
 
   return (
@@ -29,16 +31,29 @@ function Appointments() {
           <Spacer y={1} x={2} />
           <section className="row space-between flex-start">
             <section className="appointments-calendar">
-              <Calendar onChange={onChange} value={date} minDate={new Date()} />
+              <Calendar
+                onChange={onChange}
+                value={date}
+                minDate={new Date()} />
             </section>
 
             <section className="appointments-list">
-              <AppointmentsTable columns={columns_customTable} list={appointmentsArryView} />
+              <AppointmentsTable
+                columns={columns_customTable}
+                list={appointmentsArryView}
+                func_SecondaryButton={(idAppointment) => selectUser(idAppointment)}
+              />
             </section>
           </section>
         </article>
 
-        <ModalInfoAppointment />
+        <ModalInfoAppointment
+          visible={isVisibleModal}
+          onClose={() => setIsVisibleModal(false)}
+          user={selectedUser}
+          func_MainButton={() => console.log("func_MainButton")}
+          func_SecondaryButton={() => setIsVisibleModal(false)}
+        />
 
       </main>
     </div>

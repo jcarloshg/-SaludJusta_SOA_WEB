@@ -1,7 +1,12 @@
+
 import { Table, Text } from '@nextui-org/react';
 import { SecondaryButton } from '../../../../components';
 
-function AppointmentsTable({ columns, list }) {
+function AppointmentsTable({
+	columns,
+	list,
+	func_SecondaryButton = null
+}) {
 
 	const render_customTable = (exam, columnKey) => {
 		const cellValue = exam[columnKey];
@@ -13,7 +18,7 @@ function AppointmentsTable({ columns, list }) {
 			case "hour": return (<Text size={14} css={{ tt: "capitalize" }}>{cellValue}</Text>)
 			case "action": return (
 				<SecondaryButton
-					func={() => console.log("hola")}
+					func={() => func_SecondaryButton(exam.idAppointment)}
 					text="Ver cita"
 				/>
 			)

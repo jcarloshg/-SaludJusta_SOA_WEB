@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { createAdaptedUser } from '../../../adapters';
+import User from '../../../models/User.entitie';
 import { dateToStringYYYYMMDD } from '../../../utilities/date/dateToStringYYYYMMDD';
 import { appointmentViewObject } from './models';
 import { requestAppointmentsDay } from './services/requestAppointmentsDay';
@@ -10,9 +11,10 @@ export const useAppointments = () => {
     const [appointmentsArryView, setAppointmentsArryView] = useState([]);
 
     const [date, setDate] = useState(new Date());
-
-
     const onChange = (nextValue) => setDate(nextValue);
+
+    const [isVisibleModal, setIsVisibleModal] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(new User({}));
 
     useEffect(() => {
         (async () => {
@@ -43,8 +45,24 @@ export const useAppointments = () => {
     }, [usersClients])
 
 
+    const selectUser = (idAppointment) => {
+        const selectedUserFinded = usersClients.find(
+            user => user.appointments[0].idAppointment === idAppointment
+        );
+        setSelectedUser(new User(selectedUserFinded));
+    }
+
+    useEffect(() => {
+        if (selectedUser.appointments.length === 0) return;
+        setIsVisibleModal(true);
+        return () => { }
+    }, [selectedUser])
+
+
     return {
         appointmentsArryView,
-        date, onChange
+        date, onChange,
+        isVisibleModal, setIsVisibleModal,
+        selectUser, selectedUser
     }
 }
