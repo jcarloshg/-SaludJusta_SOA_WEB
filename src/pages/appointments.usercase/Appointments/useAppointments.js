@@ -1,23 +1,32 @@
+
 import { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom";
 import { createAdaptedUser } from '../../../adapters';
+import User from '../../../models/User.entitie';
 import { dateToStringYYYYMMDD } from '../../../utilities/date/dateToStringYYYYMMDD';
 import { appointmentViewObject } from './models';
+import { markAppointmentAsProgress } from './services/markAppointmentAsProgress';
 import { requestAppointmentsDay } from './services/requestAppointmentsDay';
 
 export const useAppointments = () => {
+
+    const navigate = useNavigate();
 
     const [usersClients, setUsersClients] = useState([]);
     const [appointmentsArryView, setAppointmentsArryView] = useState([]);
 
     const [date, setDate] = useState(new Date());
-
-
     const onChange = (nextValue) => setDate(nextValue);
+
+    const [isVisibleModal, setIsVisibleModal] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(new User({}));
+
+    const [isVisibleModalAlert, setIsVisibleModalAlert] = useState(false);
 
     useEffect(() => {
         (async () => {
             const dateYYYYMMDD = dateToStringYYYYMMDD(date);
-            const resRequestAppointmentsDay = await requestAppointmentsDay("2022-04-21");
+            const resRequestAppointmentsDay = await requestAppointmentsDay(dateYYYYMMDD);
             setUsersClients(resRequestAppointmentsDay.data.map((item) => createAdaptedUser(item)));
         })();
         return () => { }
@@ -25,7 +34,10 @@ export const useAppointments = () => {
 
     useEffect(() => {
 
-        if (usersClients.length === 0) return;
+        if (usersClients.length === 0) {
+            setAppointmentsArryView([]);
+            return;
+        }
 
         const auxusersClients = usersClients.map(
             (item, index) => appointmentViewObject({
@@ -43,8 +55,42 @@ export const useAppointments = () => {
     }, [usersClients])
 
 
+    const selectUser = (idAppointment) => {
+        const selectedUserFinded = usersClients.find(
+            user => user.appointments[0].idAppointment === idAppointment
+        );
+        setSelectedUser(new User(selectedUserFinded));
+    }
+
+    useEffect(() => {
+        if (selectedUser.appointments.length === 0) return;
+        setIsVisibleModal(true);
+        return () => { }
+    }, [selectedUser])
+
+    const ponerCitaEnCurso = async () => {
+        console.log(selectedUser);
+        const idAppointmentAux = selectedUser.appointments[0].idAppointment;
+        const res = await markAppointmentAsProgress(idAppointmentAux);
+
+        if (res.data.isOk === false) {
+            // TODO - show error
+            return;
+        }
+
+        setIsVisibleModal(false);
+        setSelectedUser(new User({}));
+
+        setUsersClients(usersClients.filter(
+            user => selectedUser.appointments[0].idAppointment !== user.appointments[0].idAppointment
+        ));
+    }
+
     return {
         appointmentsArryView,
-        date, onChange
+        date, onChange,
+        isVisibleModal, setIsVisibleModal,
+        selectUser, selectedUser,
+        ponerCitaEnCurso
     }
 }

@@ -7,7 +7,7 @@ function Topbar({ showActions = false }) {
     <header className="topbar-header">
       <div className="topbar">
         <div className="topbar__left">
-          <img width={75} src={logo} alt="logo" />
+          <img alt="logo" src={logo} className='logo_img' />
         </div>
         {showActions && (
           <div className="topbar__right">

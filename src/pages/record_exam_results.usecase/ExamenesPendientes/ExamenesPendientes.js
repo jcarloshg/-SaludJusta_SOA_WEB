@@ -56,8 +56,7 @@ export const ExamenesPendientes = () => {
                                 <Table.Cell>{render_customTable(item, columnKey)}</Table.Cell>
                             )}
                         </Table.Row>
-                    )
-                    }
+                    )}
                 </Table.Body>
 
             </Table>

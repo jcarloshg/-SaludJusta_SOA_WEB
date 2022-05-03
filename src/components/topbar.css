@@ -39,3 +39,9 @@
   align-items: center;
   justify-content: center;
 }
+
+.logo_img {
+  width: 100px;
+  height: 50px;
+  object-fit: contain;
+}
