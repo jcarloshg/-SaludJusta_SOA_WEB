@@ -19,7 +19,7 @@ export const existAccount = async (email) => {
         );
         return res.data;
     } catch (error) {
-        console.log(`[error] -> `, error);
-        return null;
+        // console.log(`[error] -> `, error);
+        return error.response.data;
     }
 }
