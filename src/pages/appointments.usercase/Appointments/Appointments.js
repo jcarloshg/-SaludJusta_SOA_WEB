@@ -15,7 +15,8 @@ function Appointments() {
     appointmentsArryView,
     date, onChange,
     isVisibleModal, setIsVisibleModal,
-    selectUser, selectedUser
+    selectUser, selectedUser,
+    ponerCitaEnCurso
   } = useAppointments();
 
   return (
@@ -51,7 +52,7 @@ function Appointments() {
           visible={isVisibleModal}
           onClose={() => setIsVisibleModal(false)}
           user={selectedUser}
-          func_MainButton={() => console.log("func_MainButton")}
+          func_MainButton={ponerCitaEnCurso}
           func_SecondaryButton={() => setIsVisibleModal(false)}
         />
 

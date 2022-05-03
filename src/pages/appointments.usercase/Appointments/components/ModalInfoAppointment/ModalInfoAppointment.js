@@ -59,11 +59,11 @@ export const ModalInfoAppointment = ({
                     {renderData('Nombre(s):', `${user.name}`)}
                     {renderData('Apellidos(s):', `${user.lastName}`)}
                     {renderData('Genero:', `${user.gender}`)}
-
+                    {/*
                     <Spacer y={1} />
                     <Text b size={18} >Datos de contacto</Text>
                     {renderData('Numero de telefono:', `${user.phoneNumber}`)}
-                    {renderData('Correo electronico:', `${user.email}`)}
+                    {renderData('Correo electronico:', `${user.email}`)} */}
 
                     <Spacer y={1} />
                     <Text b size={18} >Datos de la cita</Text>
@@ -73,6 +73,7 @@ export const ModalInfoAppointment = ({
                                 {renderData('Fecha:', `${dateToString(new Date(user.appointments[0].date))}`)}
                                 {renderData('Hora:', `${timeToString(hhmmssToString(user.appointments[0].time))}`)}
                                 {renderData('Tipo de examen:', `${user.appointments[0].exam.examCatalogItem.typeExam}`)}
+                                {renderData('ESTATUS:', `${user.appointments[0].status}`)}
                             </>
                         )
                     }

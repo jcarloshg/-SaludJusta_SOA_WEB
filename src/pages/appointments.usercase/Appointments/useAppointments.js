@@ -1,11 +1,16 @@
+
 import { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom";
 import { createAdaptedUser } from '../../../adapters';
 import User from '../../../models/User.entitie';
 import { dateToStringYYYYMMDD } from '../../../utilities/date/dateToStringYYYYMMDD';
 import { appointmentViewObject } from './models';
+import { markAppointmentAsProgress } from './services/markAppointmentAsProgress';
 import { requestAppointmentsDay } from './services/requestAppointmentsDay';
 
 export const useAppointments = () => {
+
+    const navigate = useNavigate();
 
     const [usersClients, setUsersClients] = useState([]);
     const [appointmentsArryView, setAppointmentsArryView] = useState([]);
@@ -27,7 +32,10 @@ export const useAppointments = () => {
 
     useEffect(() => {
 
-        if (usersClients.length === 0) return;
+        if (usersClients.length === 0) {
+            setAppointmentsArryView([]);
+            return;
+        }
 
         const auxusersClients = usersClients.map(
             (item, index) => appointmentViewObject({
@@ -58,11 +66,29 @@ export const useAppointments = () => {
         return () => { }
     }, [selectedUser])
 
+    const ponerCitaEnCurso = async () => {
+        console.log(selectedUser);
+        const idAppointmentAux = selectedUser.appointments[0].idAppointment;
+        const res = await markAppointmentAsProgress(idAppointmentAux);
+
+        if (res.data.isOk === false) {
+            // TODO - show error
+            return;
+        }
+
+        setIsVisibleModal(false);
+        setSelectedUser(new User({}));
+
+        setUsersClients(usersClients.filter(
+            user => selectedUser.appointments[0].idAppointment !== user.appointments[0].idAppointment
+        ));
+    }
 
     return {
         appointmentsArryView,
         date, onChange,
         isVisibleModal, setIsVisibleModal,
-        selectUser, selectedUser
+        selectUser, selectedUser,
+        ponerCitaEnCurso
     }
 }
