@@ -1,7 +1,7 @@
 
 import { AiOutlineShop } from "react-icons/ai";
 
-const icon = (<AiOutlineShop />)
+const icon = (<AiOutlineShop size={50} />)
 
 export const laboratorios = [
     {

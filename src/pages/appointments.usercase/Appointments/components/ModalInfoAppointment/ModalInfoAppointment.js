@@ -1,7 +1,6 @@
 import { Modal, Spacer, Text } from '@nextui-org/react'
 import React from 'react'
 import { MainButton, SecondaryButton } from '../../../../../components'
-import Appointment from '../../../../../models/Appointment.entitie';
 import User from '../../../../../models/User.entitie';
 import { dateToString, hhmmssToString, timeToString } from '../../../../../utilities/date';
 

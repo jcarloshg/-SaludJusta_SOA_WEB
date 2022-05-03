@@ -21,10 +21,12 @@ export const useAppointments = () => {
     const [isVisibleModal, setIsVisibleModal] = useState(false);
     const [selectedUser, setSelectedUser] = useState(new User({}));
 
+    const [isVisibleModalAlert, setIsVisibleModalAlert] = useState(false);
+
     useEffect(() => {
         (async () => {
             const dateYYYYMMDD = dateToStringYYYYMMDD(date);
-            const resRequestAppointmentsDay = await requestAppointmentsDay("2022-04-21");
+            const resRequestAppointmentsDay = await requestAppointmentsDay(dateYYYYMMDD);
             setUsersClients(resRequestAppointmentsDay.data.map((item) => createAdaptedUser(item)));
         })();
         return () => { }
