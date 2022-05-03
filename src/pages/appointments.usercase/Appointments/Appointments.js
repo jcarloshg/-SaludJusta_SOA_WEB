@@ -7,6 +7,7 @@ import { MainButton, Title } from '../../../components';
 import { Spacer } from '@nextui-org/react';
 import { useAppointments } from './useAppointments';
 import { columns_customTable } from './models';
+import { ModalInfoAppointment } from './components';
 
 function Appointments() {
 
@@ -36,6 +37,9 @@ function Appointments() {
             </section>
           </section>
         </article>
+
+        <ModalInfoAppointment />
+
       </main>
     </div>
   );
