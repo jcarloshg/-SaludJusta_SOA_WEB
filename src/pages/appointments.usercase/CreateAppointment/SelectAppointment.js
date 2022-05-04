@@ -1,8 +1,7 @@
 import { Spacer, Text } from '@nextui-org/react';
 import DatePicker from 'react-date-picker';
-import { Dropdown, Subtitle, Title } from '../../../../components';
-import AvailableAppointments from './available-appointments.component';
-import { BiArrowBack } from 'react-icons/bi';
+import { Dropdown, GoBackButton, Subtitle, Title } from '../../../components';
+import AvailableAppointments from './components/available-appointments.component';
 
 function SelectAppointment({
   typesOfExams,
@@ -15,9 +14,7 @@ function SelectAppointment({
 }) {
   return (
     <article className="col full-width select-appointment-container">
-      <button className="back-button" onClick={onGoBack}>
-        <BiArrowBack />
-      </button>
+      <GoBackButton onClick={onGoBack} />
       <Title>Crear Cita</Title>
       <Subtitle>Selecciona el tipo de examan, la hora y la fecha.</Subtitle>
       <div className="col center full-width">
@@ -30,7 +27,7 @@ function SelectAppointment({
         />
         <Spacer y={1} />
         <div>
-          <Text size={16} color="#028174" weight="medium">
+          <Text size={14} color="#028174">
             Fecha
           </Text>
           <Spacer y={0.2} />

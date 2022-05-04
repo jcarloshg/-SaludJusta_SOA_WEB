@@ -1,5 +1,5 @@
 import { Input, Spacer } from '@nextui-org/react';
-import { MainButton, SecondaryButton, Subtitle, Title } from '../../../../components';
+import { MainButton, SecondaryButton, Subtitle, Title } from '../../../components';
 
 function SearchCustomer({ email = '', onChangeEmail, onSearchCustomer, onCreateCustomer }) {
   return (
@@ -7,9 +7,6 @@ function SearchCustomer({ email = '', onChangeEmail, onSearchCustomer, onCreateC
       <Title>Crear Cita</Title>
       <Subtitle>Buscar cliente por correo</Subtitle>
       <Spacer y={1} />
-      {/* <section className="row justify-flex-end"> */}
-      {/* <SecondaryButton text="Crear nuevo" func={onCreateCustomer} width="500px" /> */}
-      {/* <Spacer x={0.8} /> */}
       <div className="col center">
         <Input
           label="Correo electrónico"
