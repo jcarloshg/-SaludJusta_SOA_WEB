@@ -1,6 +1,5 @@
 
 import { useEffect, useState } from 'react'
-import { useNavigate } from "react-router-dom";
 import { createAdaptedUser } from '../../../adapters';
 import User from '../../../models/User.entitie';
 import { dateToStringYYYYMMDD } from '../../../utilities/date/dateToStringYYYYMMDD';
@@ -10,7 +9,6 @@ import { requestAppointmentsDay } from './services/requestAppointmentsDay';
 
 export const useAppointments = () => {
 
-    const navigate = useNavigate();
 
     const [usersClients, setUsersClients] = useState([]);
     const [appointmentsArryView, setAppointmentsArryView] = useState([]);
@@ -20,8 +18,6 @@ export const useAppointments = () => {
 
     const [isVisibleModal, setIsVisibleModal] = useState(false);
     const [selectedUser, setSelectedUser] = useState(new User({}));
-
-    const [isVisibleModalAlert, setIsVisibleModalAlert] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -69,7 +65,6 @@ export const useAppointments = () => {
     }, [selectedUser])
 
     const ponerCitaEnCurso = async () => {
-        console.log(selectedUser);
         const idAppointmentAux = selectedUser.appointments[0].idAppointment;
         const res = await markAppointmentAsProgress(idAppointmentAux);
 

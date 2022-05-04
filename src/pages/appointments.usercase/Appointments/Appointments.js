@@ -7,7 +7,6 @@ import { Spacer } from '@nextui-org/react';
 import { useAppointments } from './useAppointments';
 import { columns_customTable } from './models';
 import { ModalInfoAppointment } from './components';
-import { ModalAlert } from '../../../components/ModalAlert/ModalAlert';
 import AppointmentsTable from './components/AppointmentsTable/appointments-table.component';
 
 function Appointments() {
