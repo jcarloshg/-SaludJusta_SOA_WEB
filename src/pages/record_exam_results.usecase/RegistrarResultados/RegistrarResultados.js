@@ -51,6 +51,7 @@ export const RegistrarResultados = () => {
                         {renderData('Nombre(s):', `${user.name}`)}
                         {renderData('Apellidos(s):', `${user.lastName}`)}
                         {renderData('Genero:', `${user.gender}`)}
+                        {renderData('Edad:', `${user.age}`)}
                     </div>
                     <div className="box_info_appointment">
                         <Text b size={18} >Fecha y hora</Text>
