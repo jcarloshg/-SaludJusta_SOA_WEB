@@ -1,21 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getAvailableHoursDay, requesExamTypes } from '../services';
 
-// const availableSchedules = [
-// {
-//   id: 1,
-//   date: '2020-05-01',
-//   time: '10:00',
-//   status: 'Disponible',
-// },
-// {
-//   id: 2,
-//   date: '2020-05-01',
-//   time: '11:00',
-//   status: 'Disponible',
-// },
-// ];
-
 const capitalize = (str) => `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
 
 function useCreateAppointment() {
@@ -24,6 +9,11 @@ function useCreateAppointment() {
   const [typesOfExams, setTypesOfExams] = useState([]);
   const [date, setDate] = useState(new Date());
   const [availableSchedules, setAvailableSchedules] = useState([]);
+  const [currentComponent, setCurrentComponent] = useState('SearchCustomer');
+
+  const onGoToSearchCustomer = () => setCurrentComponent('SearchCustomer');
+  const onGoToSelectAppointment = () => setCurrentComponent('SelectAppointment');
+  const onGoToCreateCustomer = () => setCurrentComponent('CreateCustomer');
 
   useEffect(() => {
     const fetchTypesOfExams = async () => {
@@ -55,9 +45,20 @@ function useCreateAppointment() {
   const onChangeDate = async (event) => {
     setDate(event);
     const dateStr = event.toISOString().slice(0, 10);
-    console.log(`[onChangeDate] -> `, typeOfExams, dateStr);
     const res = await getAvailableHoursDay(typeOfExams, dateStr);
-    console.log(`[res] -> `, res);
+
+    if (res === null) {
+      setAvailableSchedules([]);
+      return;
+    }
+
+    const availableHours = res.data.map((schedule) => ({
+      id: schedule.idAppointment,
+      date: schedule.date,
+      time: schedule.time,
+      status: schedule.status,
+    }));
+    setAvailableSchedules(availableHours);
   };
 
   return {
@@ -66,6 +67,10 @@ function useCreateAppointment() {
     typesOfExams,
     date,
     availableSchedules,
+    currentComponent,
+    onGoToSearchCustomer,
+    onGoToSelectAppointment,
+    onGoToCreateCustomer,
     onChangeEmail,
     onChangeTypeOfExam,
     onChangeDate,

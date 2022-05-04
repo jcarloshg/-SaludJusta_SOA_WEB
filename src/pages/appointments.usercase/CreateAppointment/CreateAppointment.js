@@ -1,31 +1,45 @@
 import SearchCustomer from './components/search-customer.component';
 import SelectAppointment from './components/select-appointment.component';
-import './CreateAppointment.css';
 import useCreateAppointment from './hooks/useCreateAppointment';
+import './CreateAppointment.css';
 
 function CreateAppointment() {
   const {
-    // email,
+    email,
     typeOfExams,
     typesOfExams,
     date,
     availableSchedules,
-    // onChangeEmail,
+    currentComponent,
+    onGoToSearchCustomer,
+    onGoToSelectAppointment,
+    onGoToCreateCustomer,
+    onChangeEmail,
     onChangeTypeOfExam,
     onChangeDate,
   } = useCreateAppointment();
 
   return (
     <main className="row create-appointment-main">
-      {/* <SearchCustomer email={email} onChangeEmail={onChangeEmail} /> */}
-      <SelectAppointment
-        typesOfExams={typesOfExams}
-        typeOfExam={typeOfExams}
-        onChangeTypeOfExam={onChangeTypeOfExam}
-        date={date}
-        onChangeDate={onChangeDate}
-        availableSchedules={availableSchedules}
-      />
+      {currentComponent === 'SearchCustomer' && (
+        <SearchCustomer
+          email={email}
+          onChangeEmail={onChangeEmail}
+          onSearchCustomer={onGoToSelectAppointment}
+          onCreateCustomer={onGoToCreateCustomer}
+        />
+      )}
+      {currentComponent === 'SelectAppointment' && (
+        <SelectAppointment
+          typesOfExams={typesOfExams}
+          typeOfExam={typeOfExams}
+          onChangeTypeOfExam={onChangeTypeOfExam}
+          date={date}
+          onChangeDate={onChangeDate}
+          availableSchedules={availableSchedules}
+          onGoBack={onGoToSearchCustomer}
+        />
+      )}
     </main>
   );
 }

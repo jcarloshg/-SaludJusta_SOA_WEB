@@ -1,11 +1,11 @@
 .create-appointment-main {
-  padding: 1rem;
+  padding: 0 1rem;
 }
 
 .create-appointment-container {
   border-radius: 2rem;
   /* box-shadow: 0 0 0.2rem #c1c1c1; */
-  padding: 0 1rem;
+  padding: 1rem 1rem;
   /* max-width: 30rem; */
 }
 
@@ -14,4 +14,28 @@
   /* box-shadow: 0 0 0.2rem #c1c1c1; */
   padding: 0 1rem;
   /* max-width: 32rem; */
+}
+
+.back-button {
+  margin-bottom: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100px;
+}
+
+.back-button:hover {
+  cursor: pointer;
+}
+
+.back-button:focus {
+  outline: none;
+}
+
+.back-button:active {
+  outline: none;
+  transform: scale(0.9);
 }
