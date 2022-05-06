@@ -9,6 +9,7 @@ function createAdaptedUser(endpointUser = defaultUser) {
         idUser: endpointUser.idUser === undefined ? null : endpointUser.idUser,
         name: endpointUser.name,
         lastName: endpointUser.lastName,
+        age: endpointUser.age,
         phoneNumber: endpointUser.phoneNumber,
         gender: endpointUser.gender,
         email: endpointUser.email,

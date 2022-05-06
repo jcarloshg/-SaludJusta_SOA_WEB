@@ -24,17 +24,17 @@ export const useLogin = () => {
     };
 
     const iniciarSesion_proof = async () => {
-        // const emailExample = "luis@email.com";
-        // const passwordExample = "luis123";
+        const emailExample = "luis@email.com";
+        const passwordExample = "luis123";
 
-        const resExistAccount = await existAccount(email);
+        const resExistAccount = await existAccount(emailExample);
 
         if (resExistAccount.isOk === false) {
             console.log("resExistAccount - show error");
             return;
         }
 
-        const resLoggin = await loggin(email, password);
+        const resLoggin = await loggin(emailExample, passwordExample);
 
         console.log(resLoggin);
         if (resLoggin.isOk === false) {

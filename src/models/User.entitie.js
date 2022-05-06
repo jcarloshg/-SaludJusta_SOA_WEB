@@ -1,11 +1,11 @@
 const Appointment = require("./Appointment.entitie");
-
 class User {
 
     constructor({
         idUser = null,
         name = null,
         lastName = null,
+        age = null,
         phoneNumber = null,
         gender = null,
         email = null,
@@ -17,6 +17,7 @@ class User {
         this.idUser = idUser;
         this.name = name;
         this.lastName = lastName;
+        this.age = age;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
         this.email = email;
@@ -28,35 +29,6 @@ class User {
     }
 
     getRol = () => this.rol;
-
-
-    /**
-     * check if any property is null, NOTE this method not check [id]
-     * @returns
-     */
-    isPropertiesNull() {
-        if (!this.name || !this.lastName || !this.phoneNumber || !this.gender || !this.email || !this.password || !this.role) {
-            return true;
-        }
-        return false;
-    }
-
-
-    /**
-     * check if any property is null, NOTE this method not check [id]
-     * @returns
-     */
-    isPropertiesVoid() {
-        if (this.name === "") return true;
-        if (this.lastName === "") return true;
-        if (this.phoneNumber === "") return true;
-        if (this.gender === "") return true;
-        if (this.email === "") return true;
-        if (this.password === "") return true;
-        if (this.role === "") return true;
-
-        return false;
-    }
 
 }
 
