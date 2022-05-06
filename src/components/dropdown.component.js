@@ -1,14 +1,12 @@
 import uid from '../utilities/uid';
 import './dropdown.css';
 
-const { log } = console;
-
 function Dropdown({
   fullWidth = false,
   label = '',
   value = '',
   options = [],
-  onChange = () => log('onChange not defined'),
+  onChange = () => null,
 }) {
   return (
     <label className="dropdown-label">

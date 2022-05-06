@@ -10,6 +10,7 @@ function useCreateAppointment() {
   const [date, setDate] = useState(new Date());
   const [availableSchedules, setAvailableSchedules] = useState([]);
   const [currentComponent, setCurrentComponent] = useState('SearchCustomer');
+  const [visible, setVisible] = useState(true);
 
   const onGoToSearchCustomer = () => setCurrentComponent('SearchCustomer');
   const onGoToSelectAppointment = () => setCurrentComponent('SelectAppointment');
@@ -61,6 +62,11 @@ function useCreateAppointment() {
     setAvailableSchedules(availableHours);
   };
 
+  const closeHandler = () => {
+    setVisible(false);
+    console.log('closed');
+  };
+
   return {
     email,
     typeOfExams,
@@ -68,12 +74,14 @@ function useCreateAppointment() {
     date,
     availableSchedules,
     currentComponent,
+    visible,
     onGoToSearchCustomer,
     onGoToSelectAppointment,
     onGoToCreateCustomer,
     onChangeEmail,
     onChangeTypeOfExam,
     onChangeDate,
+    closeHandler,
   };
 }
 

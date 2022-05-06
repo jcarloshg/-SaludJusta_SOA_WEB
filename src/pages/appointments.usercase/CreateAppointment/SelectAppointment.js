@@ -1,7 +1,7 @@
 import { Spacer, Text } from '@nextui-org/react';
 import DatePicker from 'react-date-picker';
 import { Dropdown, GoBackButton, Subtitle, Title } from '../../../components';
-import AvailableAppointments from './components/available-appointments.component';
+import { AvailableAppointments } from './components';
 
 function SelectAppointment({
   typesOfExams,

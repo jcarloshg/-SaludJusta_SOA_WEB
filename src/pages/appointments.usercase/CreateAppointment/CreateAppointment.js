@@ -1,9 +1,8 @@
+import CreateCustomer from './CreateCustomer';
 import SearchCustomer from './SearchCustomer';
 import SelectAppointment from './SelectAppointment';
 import useCreateAppointment from './hooks/useCreateAppointment';
 import './CreateAppointment.css';
-import CreateCustomer from './components/create-customer.component';
-import { useState } from 'react';
 
 function CreateAppointment() {
   const {
@@ -13,20 +12,15 @@ function CreateAppointment() {
     date,
     availableSchedules,
     currentComponent,
+    visible,
     onGoToSearchCustomer,
     onGoToSelectAppointment,
     onGoToCreateCustomer,
     onChangeEmail,
     onChangeTypeOfExam,
     onChangeDate,
+    closeHandler,
   } = useCreateAppointment();
-
-  const [visible, setVisible] = useState(true);
-
-  const closeHandler = () => {
-    setVisible(false);
-    console.log('closed');
-  };
 
   return (
     <>
