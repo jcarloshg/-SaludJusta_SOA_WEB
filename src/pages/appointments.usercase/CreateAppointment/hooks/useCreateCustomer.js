@@ -27,7 +27,10 @@ function useCreateCustomer(closeHandler = () => null) {
   }
 
   const onSaveCustomer = () => {
-    console.log('save customer', email)
+    if (email === '' || phone === '') {
+      setPopover(true)
+      return
+    }
     closeHandler()
   }
 

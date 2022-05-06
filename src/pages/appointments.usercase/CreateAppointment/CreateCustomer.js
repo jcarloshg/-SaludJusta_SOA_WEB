@@ -35,6 +35,7 @@ function CreateCustomer({ visible = false, closeHandler = () => null }) {
       onClick={step === 0 ? goToNextStep : onSaveCustomer}
       openPopover={popover}
       onOpenChange={onOpenPopoverChange}
+      loading={false}
     >
       {step === 0 ? (
         <>
