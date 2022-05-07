@@ -1,6 +1,7 @@
 import axios from 'axios'
-import qs from 'qs'
 import { generatePassword } from '../../../../utilities'
+
+const qs = require('qs')
 
 async function createAccount({
   name = '',
@@ -13,18 +14,24 @@ async function createAccount({
   try {
     const url = `${process.env.REACT_APP_URL}${process.env.REACT_APP_API_ACCOUNT}/createAccount`
     const data = qs.stringify({
-      name,
-      lastName,
-      age,
-      gender,
-      phoneNumber,
-      email,
+      name: name,
+      lastName: lastName,
+      age: age,
+      gender: gender,
+      phoneNumber: phoneNumber,
+      email: email,
       password: generatePassword(12),
       role: 'CLIENT',
     })
-
-    const res = await axios.post(url, data)
-
+    const config = {
+      method: 'post',
+      url,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data,
+    }
+    const res = await axios(config)
     return res.data
   } catch (error) {
     return null

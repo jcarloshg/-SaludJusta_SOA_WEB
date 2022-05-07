@@ -1,24 +1,25 @@
-import { Input } from '@nextui-org/react';
-import { useMemo } from 'react';
-import { validateEmail } from '../../../../utilities';
+import { Input } from '@nextui-org/react'
+import { useMemo } from 'react'
+import { validateEmail } from '../../../../utilities'
 
-function InputEmail({ value = '', reset = () => null, bindings = {} }) {
+function InputEmail({ email = '', setEmail = () => null, reset = () => null }) {
   const helper = useMemo(() => {
-    if (!value)
+    if (!email)
       return {
         text: '',
         color: '',
-      };
-    const isValid = validateEmail(value);
+      }
+    const isValid = validateEmail(email)
     return {
       text: isValid ? 'Correo electrónico válido' : 'Correo electrónico inválido',
       color: isValid ? 'primary' : 'error',
-    };
-  }, [value]);
+    }
+  }, [email])
 
   return (
     <Input
-      {...bindings}
+      value={email}
+      onChange={setEmail}
       clearable
       bordered
       fullWidth
@@ -33,7 +34,7 @@ function InputEmail({ value = '', reset = () => null, bindings = {} }) {
       label="Correo electrónico"
       placeholder="correo@ejemplo.com"
     />
-  );
+  )
 }
 
-export default InputEmail;
+export default InputEmail

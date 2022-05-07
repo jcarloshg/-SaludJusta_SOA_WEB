@@ -1,8 +1,8 @@
-import uid from '../utilities/uid';
-import './dropdown.css';
+import uid from '../utilities/uid'
+import './dropdown.css'
 
 function Dropdown({
-  fullWidth = false,
+  fullWidth = true,
   label = '',
   value = '',
   options = [],
@@ -16,14 +16,14 @@ function Dropdown({
         value={value}
         onChange={onChange}
       >
-        {options.map((option) => (
+        {options.map(option => (
           <option className="dropdown-option" key={uid()} value={option.value}>
             {option.label}
           </option>
         ))}
       </select>
     </label>
-  );
+  )
 }
 
-export default Dropdown;
+export default Dropdown

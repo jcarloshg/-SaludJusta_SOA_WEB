@@ -1,72 +1,59 @@
 import { Spacer } from '@nextui-org/react'
 import { Dropdown, GoBackButton, Subtitle } from '../../../components'
-import { InputEmail, InputModal, InputPhone, ModalCreateCustomer } from './components'
+import * as Input from './components'
 import useCreateCustomer from './hooks/useCreateCustomer'
 
 function CreateCustomer({ visible = false, closeHandler = () => null }) {
   const {
-    step,
-    name,
-    lastName,
-    genre,
-    age,
-    email,
-    phone,
-    popover,
-    onOpenPopoverChange,
-    onBack,
+    user,
     onChangeName,
     onChangeLastName,
-    onChangeGenre,
     onChangeAge,
+    onChangeGender,
+    onChangeEmail,
+    onChangePhone,
+    onPreviusStep,
     goToNextStep,
     onSaveCustomer,
-    resetEmail,
-    resetPhone,
-    emailBindings,
-    phoneBindings,
+    onOpenPopoverChange,
   } = useCreateCustomer(closeHandler)
 
   return (
-    <ModalCreateCustomer
+    <Input.ModalCreateCustomer
       open={visible}
       onClose={closeHandler}
-      labelButton={step === 0 ? 'Siguiente' : 'Guardar'}
-      onClick={step === 0 ? goToNextStep : onSaveCustomer}
-      openPopover={popover}
+      labelButton={user.step === 0 ? 'Siguiente' : 'Guardar'}
+      onClick={user.step === 0 ? goToNextStep : onSaveCustomer}
+      openPopover={user.popover}
       onOpenChange={onOpenPopoverChange}
       loading={false}
     >
-      {step === 0 ? (
+      {user.step === 0 ? (
         <>
           <Subtitle>1. Datos personales</Subtitle>
           <Spacer y={0.1} />
-          <InputModal label="Nombre(s)" value={name} onChange={onChangeName} />
-          <InputModal label="Apellidos" value={lastName} onChange={onChangeLastName} />
+          <Input.InputModal label="Nombre(s)" value={user.name} onChange={onChangeName} />
+          <Input.InputName value={user.lastName} onChange={onChangeLastName} />
           <Dropdown
-            fullWidth
             label="Sexo"
-            options={[
-              { value: 'M', label: 'Masculino' },
-              { value: 'F', label: 'Femenino' },
-            ]}
-            value={genre}
-            onChange={onChangeGenre}
+            options={user.options}
+            value={user.gender}
+            onChange={onChangeGender}
           />
-          <InputModal label="Edad" value={age} onChange={onChangeAge} type="number" clearable={false} />
+          <Input.InputAge value={user.age} onChange={onChangeAge} />
         </>
       ) : (
         <>
-          <GoBackButton onClick={onBack} />
+          <GoBackButton onClick={onPreviusStep} />
           <Subtitle>2. Datos de contacto</Subtitle>
           <Spacer y={0.1} />
-          <InputEmail value={email} reset={resetEmail} bindings={emailBindings} />
+          <Input.InputEmail email={user.email} setEmail={onChangeEmail} />
           <Spacer y={0.1} />
-          <InputPhone value={phone} reset={resetPhone} bindings={phoneBindings} />
+          <Input.InputPhone phone={user.phoneNumber} setPhone={onChangePhone} />
           <Spacer y={0.1} />
         </>
       )}
-    </ModalCreateCustomer>
+    </Input.ModalCreateCustomer>
   )
 }
 

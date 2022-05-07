@@ -1,24 +1,25 @@
-import { Input } from '@nextui-org/react';
-import { useMemo } from 'react';
-import { validatePhone } from '../../../../utilities';
+import { Input } from '@nextui-org/react'
+import { useMemo } from 'react'
+import { validatePhone } from '../../../../utilities'
 
-function InputPhone({ value = '', reset = () => null, bindings = {} }) {
+function InputPhone({ phone = '', setPhone = () => null, reset = () => null }) {
   const helper = useMemo(() => {
-    if (!value)
+    if (!phone)
       return {
         text: '',
         color: '',
-      };
-    const isValid = validatePhone(value);
+      }
+    const isValid = validatePhone(phone)
     return {
       text: isValid ? 'Teléfono válido' : 'Teléfono inválido',
       color: isValid ? 'primary' : 'error',
-    };
-  }, [value]);
+    }
+  }, [phone])
 
   return (
     <Input
-      {...bindings}
+      value={phone}
+      onChange={setPhone}
       clearable
       bordered
       fullWidth
@@ -33,7 +34,7 @@ function InputPhone({ value = '', reset = () => null, bindings = {} }) {
       label="Número de teléfono"
       placeholder="0001112233"
     />
-  );
+  )
 }
 
-export default InputPhone;
+export default InputPhone

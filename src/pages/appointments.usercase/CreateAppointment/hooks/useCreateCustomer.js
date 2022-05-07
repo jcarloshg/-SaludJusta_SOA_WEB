@@ -1,64 +1,63 @@
-import { useInput } from '@nextui-org/react'
-import { useState } from 'react'
+import { useReducer } from 'react'
+import initialUser from '../models/initial-user'
+import userReducer from '../reducers/userReducer'
+import { createAccount } from '../services'
+import actions from '../models/user-actions'
 
 function useCreateCustomer(closeHandler = () => null) {
-  const [step, setStep] = useState(0)
-  const [name, setName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [genre, setGenre] = useState('')
-  const [age, setAge] = useState(18)
-  const [popover, setPopover] = useState(false)
-  const { value: email, reset: resetEmail, bindings: emailBindings } = useInput('')
-  const { value: phone, reset: resetPhone, bindings: phoneBindings } = useInput('')
+  const [user, dispatch] = useReducer(userReducer, initialUser)
 
-  const onNext = () => setStep(step + 1)
-  const onBack = () => setStep(step - 1)
-  const onChangeName = (e) => setName(e.target.value)
-  const onChangeLastName = (e) => setLastName(e.target.value)
-  const onChangeGenre = (e) => setGenre(e.target.value)
-  const onChangeAge = (e) => setAge(e.target.value)
+  const userDispatch = (type, payload) => dispatch({ type, payload })
+  const onChangeName = e => userDispatch(actions.onChangeName, e.target.value)
+  const onChangeLastName = e => userDispatch(actions.onChangeLastName, e.target.value)
+  const onChangeAge = e => userDispatch(actions.onChangeAge, e.target.value)
+  const onChangeGender = e => userDispatch(actions.onChangeGender, e.target.value)
+  const onChangeEmail = e => userDispatch(actions.onChangeEmail, e.target.value)
+  const onChangePhone = e => userDispatch(actions.onChangePhone, e.target.value)
+  const onNextStep = () => dispatch({ type: actions.onNextStep })
+  const onPreviusStep = () => dispatch({ type: actions.onPreviusStep })
+  const onOpenPopover = () => dispatch({ type: actions.onOpenPopover })
+  const onClosePopover = () => dispatch({ type: actions.onClosePopover })
 
   const goToNextStep = () => {
-    if (name === '' || lastName === '' || age < 18) {
-      setPopover(true)
+    if (user.name === '' || user.lastName === '' || user.age < 18) {
+      onOpenPopover()
       return
     }
-    onNext()
+    console.log('goToNextStep', user)
+    onNextStep()
   }
 
-  const onSaveCustomer = () => {
-    if (email === '' || phone === '') {
-      setPopover(true)
+  const createCustomer = async () => {
+    const res = await createAccount(user)
+    console.log('res', res)
+  }
+
+  const onSaveCustomer = async () => {
+    if (user.email === '' || user.phone === '') {
+      onOpenPopover()
       return
     }
+    await createCustomer()
     closeHandler()
   }
 
   const onOpenPopoverChange = () => {
-    if (popover) setPopover(false)
+    if (user.popover) onClosePopover()
   }
 
   return {
-    step,
-    name,
-    lastName,
-    genre,
-    age,
-    email,
-    phone,
-    popover,
-    onOpenPopoverChange,
-    onBack,
+    user,
     onChangeName,
     onChangeLastName,
-    onChangeGenre,
     onChangeAge,
+    onChangeGender,
+    onChangeEmail,
+    onChangePhone,
+    onPreviusStep,
     goToNextStep,
     onSaveCustomer,
-    resetEmail,
-    resetPhone,
-    emailBindings,
-    phoneBindings,
+    onOpenPopoverChange,
   }
 }
 
