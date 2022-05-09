@@ -1,10 +1,13 @@
-import { useReducer } from 'react'
+import { useContext, useReducer } from 'react'
 import initialUser from '../models/initial-user'
 import userReducer from '../reducers/userReducer'
 import { createAccount } from '../services'
 import actions from '../models/user-actions'
+import { AppointmentsContext } from '../../HomeAppointments/contexts/AppointmentsContext'
 
 function useCreateCustomer(closeHandler = () => null) {
+  const { setInfoMessage, onInfoShow, goToSelectAppointment } =
+    useContext(AppointmentsContext)
   const [user, dispatch] = useReducer(userReducer, initialUser)
 
   const userDispatch = (type = '', payload = null) => dispatch({ type, payload })
@@ -46,6 +49,10 @@ function useCreateCustomer(closeHandler = () => null) {
     console.log('createCustomer', res)
     onStopLoading()
     onClear()
+    closeHandler()
+    setInfoMessage('Usuario creado correctamente')
+    onInfoShow()
+    goToSelectAppointment()
   }
 
   const onSaveCustomer = async () => {

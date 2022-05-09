@@ -22,16 +22,17 @@ function SelectAppointment() {
       <GoBackButton onClick={goToSearchCustomer} />
       <Title>Crear Cita</Title>
       <Subtitle>Selecciona el tipo de examan, la hora y la fecha.</Subtitle>
-      <div className="col center full-width">
-        <Dropdown
-          fullWidth
-          label="Tipo de examen"
-          options={typesOfExams}
-          value={typeOfExam}
-          onChange={onChangeTypeOfExam}
-        />
+      <div className="select-appointment col center">
+        <div className="full-width">
+          <Dropdown
+            label="Tipo de examen"
+            options={typesOfExams}
+            value={typeOfExam}
+            onChange={onChangeTypeOfExam}
+          />
+        </div>
         <Spacer y={1} />
-        <div>
+        <div className="full-width">
           <Text size={14} color="#028174">
             Fecha
           </Text>

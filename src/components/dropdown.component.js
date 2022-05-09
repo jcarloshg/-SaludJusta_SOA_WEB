@@ -9,7 +9,7 @@ function Dropdown({
   onChange = () => null,
 }) {
   return (
-    <label className="dropdown-label">
+    <label className="dropdown-label full-width">
       <p>{label}</p>
       <select
         className={`dropdown-select${fullWidth ? ' full-width' : ''}`}

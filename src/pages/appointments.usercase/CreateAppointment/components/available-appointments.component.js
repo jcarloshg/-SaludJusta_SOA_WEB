@@ -1,5 +1,5 @@
-import { Table, Text } from '@nextui-org/react';
-import tableCell from './table-cell.components';
+import { Table, Text } from '@nextui-org/react'
+import tableCell from './table-cell.component'
 
 function AvailableAppointments({ list }) {
   const columns = [
@@ -7,7 +7,7 @@ function AvailableAppointments({ list }) {
     { name: 'Hora', uid: 'time' },
     { name: 'Estado', uid: 'status' },
     { name: 'Accion', uid: 'accion' },
-  ];
+  ]
 
   return (
     <>
@@ -15,20 +15,23 @@ function AvailableAppointments({ list }) {
         aria-label="Citas"
         css={{ height: 'auto', minWidth: '40rem', zIndex: '1' }}
         selectionMode="none"
-        shadow={false}
-        striped
+        shadow
+        // striped
       >
         <Table.Header columns={columns}>
-          {(column) => (
-            <Table.Column key={column.uid} align={column.uid === 'accion' ? 'center' : 'start'}>
+          {column => (
+            <Table.Column
+              key={column.uid}
+              align={column.uid === 'accion' ? 'center' : 'start'}
+            >
               {column.name}
             </Table.Column>
           )}
         </Table.Header>
         <Table.Body items={list}>
-          {(item) => (
+          {item => (
             <Table.Row>
-              {(columnKey) => <Table.Cell>{tableCell(item, columnKey)}</Table.Cell>}
+              {columnKey => <Table.Cell>{tableCell(item, columnKey)}</Table.Cell>}
             </Table.Row>
           )}
         </Table.Body>
@@ -40,7 +43,7 @@ function AvailableAppointments({ list }) {
         </Text>
       )}
     </>
-  );
+  )
 }
 
-export default AvailableAppointments;
+export default AvailableAppointments

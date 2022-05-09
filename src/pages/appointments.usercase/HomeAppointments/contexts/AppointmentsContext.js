@@ -11,6 +11,10 @@ const AppointmentsProvider = ({ children }) => {
   const [infoMessage, setInfoMessage] = useState('Usuario creado correctamente')
   const [loading, setLoading] = useState(false)
 
+  const [idUser, setIdUser] = useState('')
+  const [idExamCatalog, setIdExamCatalog] = useState('')
+  const [idAppointment, setIdAppointment] = useState('')
+
   const onInfoHide = () => setInfoVisible(false)
   const onCreateCustomerHide = () => setCreateCustomerVisible(false)
   const goToSelectAppointment = () => setCurrentScreen('SelectAppointment')
@@ -73,6 +77,12 @@ const AppointmentsProvider = ({ children }) => {
         goToSearchCustomer,
         goToSelectAppointment,
         onSearchCustomer,
+        idUser,
+        setIdUser,
+        idExamCatalog,
+        setIdExamCatalog,
+        idAppointment,
+        setIdAppointment,
       }}
     >
       {children}

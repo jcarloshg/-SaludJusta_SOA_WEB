@@ -4,10 +4,26 @@ import { getAvailableHoursDay, requesExamTypes } from '../services'
 const capitalize = str => `${str.charAt(0).toUpperCase()}${str.slice(1)}`
 
 function useCreateAppointment() {
-  const [typeOfExam, setTypeOfExam] = useState('AUDIOMETRÍA')
+  const [typeOfExam, setTypeOfExam] = useState('')
   const [typesOfExams, setTypesOfExams] = useState([])
   const [date, setDate] = useState(new Date())
   const [availableSchedules, setAvailableSchedules] = useState([])
+
+  const fetchAvailableHours = async (typeExam = '', dateStr = '') => {
+    const res = await getAvailableHoursDay(typeExam, dateStr)
+    if (res === null) {
+      setAvailableSchedules([])
+      return
+    }
+    const availableHours = res.data.map(schedule => ({
+      id: schedule.idAppointment,
+      date: schedule.date.split('T')[0] ?? '',
+      time: schedule.time,
+      status: schedule.status,
+      accion: schedule.idAppointment,
+    }))
+    setAvailableSchedules(availableHours)
+  }
 
   useEffect(() => {
     const fetchTypesOfExams = async () => {
@@ -21,34 +37,27 @@ function useCreateAppointment() {
         }))
 
         setTypesOfExams(types)
+        setTypeOfExam(types[0].value)
+
+        const dateStr = date.toISOString().slice(0, 10)
+        await fetchAvailableHours(types[0].value, dateStr)
       }
     }
 
     fetchTypesOfExams()
   }, [])
 
-  const onChangeTypeOfExam = event => {
+  const onChangeTypeOfExam = async event => {
     console.log(`[onChangeTypeOfExam] -> `, event.target.value)
     setTypeOfExam(event.target.value)
+    const dateStr = date.toISOString().slice(0, 10)
+    await fetchAvailableHours(event.target.value, dateStr)
   }
 
   const onChangeDate = async event => {
     setDate(event)
     const dateStr = event.toISOString().slice(0, 10)
-    const res = await getAvailableHoursDay(typeOfExam, dateStr)
-
-    if (res === null) {
-      setAvailableSchedules([])
-      return
-    }
-
-    const availableHours = res.data.map(schedule => ({
-      id: schedule.idAppointment,
-      date: schedule.date,
-      time: schedule.time,
-      status: schedule.status,
-    }))
-    setAvailableSchedules(availableHours)
+    await fetchAvailableHours(typeOfExam, dateStr)
   }
 
   return {
