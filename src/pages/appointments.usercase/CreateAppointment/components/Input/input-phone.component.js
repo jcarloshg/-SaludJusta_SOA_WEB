@@ -1,25 +1,25 @@
 import { Input } from '@nextui-org/react'
 import { useMemo } from 'react'
-import { validateEmail } from '../../../../utilities'
+import { validatePhone } from '../../../../../utilities'
 
-function InputEmail({ email = '', setEmail = () => null, reset = () => null }) {
+function InputPhone({ phone = '', setPhone = () => null, reset = () => null }) {
   const helper = useMemo(() => {
-    if (!email)
+    if (!phone)
       return {
         text: '',
         color: '',
       }
-    const isValid = validateEmail(email)
+    const isValid = validatePhone(phone)
     return {
-      text: isValid ? 'Correo electrónico válido' : 'Correo electrónico inválido',
+      text: isValid ? 'Teléfono válido' : 'Teléfono inválido',
       color: isValid ? 'primary' : 'error',
     }
-  }, [email])
+  }, [phone])
 
   return (
     <Input
-      value={email}
-      onChange={setEmail}
+      value={phone}
+      onChange={setPhone}
       clearable
       bordered
       fullWidth
@@ -30,11 +30,11 @@ function InputEmail({ email = '', setEmail = () => null, reset = () => null }) {
       color={helper.color}
       helperColor={helper.color}
       helperText={helper.text}
-      type="email"
-      label="Correo electrónico"
-      placeholder="correo@ejemplo.com"
+      type="text"
+      label="Número de teléfono"
+      placeholder="0001112233"
     />
   )
 }
 
-export default InputEmail
+export default InputPhone

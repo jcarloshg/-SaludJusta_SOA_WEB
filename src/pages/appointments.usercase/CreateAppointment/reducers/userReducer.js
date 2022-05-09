@@ -1,3 +1,4 @@
+import initialUser from '../models/initial-user'
 import actions from '../models/user-actions'
 
 const reducerObject = (state, payload) => ({
@@ -11,6 +12,10 @@ const reducerObject = (state, payload) => ({
   [actions.onPreviusStep]: { ...state, step: state.step - 1 },
   [actions.onOpenPopover]: { ...state, popover: true },
   [actions.onClosePopover]: { ...state, popover: false },
+  [actions.onLoading]: { ...state, isLoading: true },
+  [actions.onStopLoading]: { ...state, isLoading: false },
+  [actions.onChangeMessage]: { ...state, message: payload },
+  [actions.onClear]: { ...initialUser },
 })
 
 const userReducer = (state, action) => {

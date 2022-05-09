@@ -1,7 +1,8 @@
 import { Spacer } from '@nextui-org/react'
 import { Dropdown, GoBackButton, Subtitle } from '../../../components'
-import * as Input from './components'
+import { ModalCreateCustomer } from './components'
 import useCreateCustomer from './hooks/useCreateCustomer'
+import * as Input from './components/Input'
 
 function CreateCustomer({ visible = false, closeHandler = () => null }) {
   const {
@@ -16,17 +17,19 @@ function CreateCustomer({ visible = false, closeHandler = () => null }) {
     goToNextStep,
     onSaveCustomer,
     onOpenPopoverChange,
+    onCancel,
   } = useCreateCustomer(closeHandler)
 
   return (
-    <Input.ModalCreateCustomer
+    <ModalCreateCustomer
       open={visible}
-      onClose={closeHandler}
+      onClose={onCancel}
       labelButton={user.step === 0 ? 'Siguiente' : 'Guardar'}
       onClick={user.step === 0 ? goToNextStep : onSaveCustomer}
       openPopover={user.popover}
       onOpenChange={onOpenPopoverChange}
-      loading={false}
+      message={user.message}
+      loading={user.isLoading}
     >
       {user.step === 0 ? (
         <>
@@ -53,7 +56,7 @@ function CreateCustomer({ visible = false, closeHandler = () => null }) {
           <Spacer y={0.1} />
         </>
       )}
-    </Input.ModalCreateCustomer>
+    </ModalCreateCustomer>
   )
 }
 

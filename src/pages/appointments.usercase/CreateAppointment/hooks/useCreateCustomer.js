@@ -7,7 +7,7 @@ import actions from '../models/user-actions'
 function useCreateCustomer(closeHandler = () => null) {
   const [user, dispatch] = useReducer(userReducer, initialUser)
 
-  const userDispatch = (type, payload) => dispatch({ type, payload })
+  const userDispatch = (type = '', payload = null) => dispatch({ type, payload })
   const onChangeName = e => userDispatch(actions.onChangeName, e.target.value)
   const onChangeLastName = e => userDispatch(actions.onChangeLastName, e.target.value)
   const onChangeAge = e => userDispatch(actions.onChangeAge, e.target.value)
@@ -18,32 +18,52 @@ function useCreateCustomer(closeHandler = () => null) {
   const onPreviusStep = () => dispatch({ type: actions.onPreviusStep })
   const onOpenPopover = () => dispatch({ type: actions.onOpenPopover })
   const onClosePopover = () => dispatch({ type: actions.onClosePopover })
+  const onLoading = () => dispatch({ type: actions.onLoading })
+  const onStopLoading = () => dispatch({ type: actions.onStopLoading })
+  const onChangeMessage = (msg = '') => userDispatch(actions.onChangeMessage, msg)
+  const onEmptyFieldsMsg = () => onChangeMessage('No dejes campos vacíos')
+  const onErrorMessage = () => onChangeMessage('Error al crear el usuario')
+  const onClear = () => dispatch({ type: actions.onClear })
 
   const goToNextStep = () => {
     if (user.name === '' || user.lastName === '' || user.age < 18) {
+      onEmptyFieldsMsg()
       onOpenPopover()
       return
     }
-    console.log('goToNextStep', user)
     onNextStep()
   }
 
   const createCustomer = async () => {
+    onLoading()
     const res = await createAccount(user)
-    console.log('res', res)
+    if (res === null) {
+      onErrorMessage()
+      onStopLoading()
+      onOpenPopover()
+      return
+    }
+    console.log('createCustomer', res)
+    onStopLoading()
+    onClear()
   }
 
   const onSaveCustomer = async () => {
     if (user.email === '' || user.phone === '') {
+      onEmptyFieldsMsg()
       onOpenPopover()
       return
     }
     await createCustomer()
-    closeHandler()
   }
 
   const onOpenPopoverChange = () => {
     if (user.popover) onClosePopover()
+  }
+
+  const onCancel = () => {
+    onClear()
+    closeHandler()
   }
 
   return {
@@ -58,6 +78,7 @@ function useCreateCustomer(closeHandler = () => null) {
     goToNextStep,
     onSaveCustomer,
     onOpenPopoverChange,
+    onCancel,
   }
 }
 

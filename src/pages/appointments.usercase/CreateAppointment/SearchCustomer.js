@@ -1,7 +1,13 @@
-import { Input, Spacer } from '@nextui-org/react';
-import { MainButton, SecondaryButton, Subtitle, Title } from '../../../components';
+import { Button, Input, Loading, Spacer } from '@nextui-org/react'
+import { useContext } from 'react'
+import { Subtitle, Title } from '../../../components'
+import { AppointmentsContext } from '../HomeAppointments/contexts/AppointmentsContext'
+import { createCustomerButton, searchButton } from './components'
 
-function SearchCustomer({ email = '', onChangeEmail, onSearchCustomer, onCreateCustomer }) {
+function SearchCustomer() {
+  const { email, loading, onChangeEmail, onCreateCustomerShow, onSearchCustomer } =
+    useContext(AppointmentsContext)
+
   return (
     <article className="col full-width create-appointment-container">
       <Title>Crear Cita</Title>
@@ -20,15 +26,21 @@ function SearchCustomer({ email = '', onChangeEmail, onSearchCustomer, onCreateC
           css={{ width: '330px' }}
         />
         <Spacer y={1} />
-        <MainButton func={onSearchCustomer} width="330px">
-          Buscar
-        </MainButton>
+        <Button onClick={onSearchCustomer} auto disabled={loading} css={searchButton}>
+          {!loading ? 'Buscar' : <Loading size="sm" type="spinner" color="white" />}
+        </Button>
         <Spacer y={0.5} />
-        <SecondaryButton text="Crear nuevo cliente" func={onCreateCustomer} width="330px" />
+        <Button
+          onClick={onCreateCustomerShow}
+          auto
+          disabled={loading}
+          css={createCustomerButton}
+        >
+          Crear nuevo cliente
+        </Button>
       </div>
-      {/* </section> */}
     </article>
-  );
+  )
 }
 
-export default SearchCustomer;
+export default SearchCustomer

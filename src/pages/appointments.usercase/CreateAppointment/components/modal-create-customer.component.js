@@ -1,6 +1,7 @@
 import { Button, Loading, Modal, Popover, Row, Text } from '@nextui-org/react'
 import { Subtitle, Title } from '../../../../components'
 import { RiErrorWarningFill } from 'react-icons/ri'
+import modalButton from './modal-button.style'
 
 function ModalCreateCustomer({
   open = false,
@@ -9,11 +10,19 @@ function ModalCreateCustomer({
   onClick = () => null,
   openPopover = false,
   onOpenChange = () => null,
+  message = 'No dejes campos vacíos',
   loading = false,
   children,
 }) {
   return (
-    <Modal closeButton preventClose blur aria-labelledby="modal-title" open={open} onClose={onClose}>
+    <Modal
+      closeButton
+      preventClose
+      blur
+      aria-labelledby="modal-title"
+      open={open}
+      onClose={onClose}
+    >
       <Modal.Header>
         <Row wrap="wrap">
           <Title>Crear nuevo usuario</Title>
@@ -27,32 +36,18 @@ function ModalCreateCustomer({
         </Button>
         <Popover placement="top" isOpen={openPopover} onOpenChange={onOpenChange}>
           <Popover.Trigger>
-            <Button
-              onClick={onClick}
-              auto
-              disabled={loading}
-              css={{
-                '&:disabled': {
-                  backgroundColor: '$primary',
-                  color: '$white',
-                  cursor: 'not-allowed',
-                  opacity: 0.8,
-                },
-              }}
-            >
-              {!loading ? labelButton : <Loading size="sm" type="spinner" color="white" />}
+            <Button onClick={onClick} auto disabled={loading} css={modalButton}>
+              {!loading ? (
+                labelButton
+              ) : (
+                <Loading size="sm" type="spinner" color="white" />
+              )}
             </Button>
           </Popover.Trigger>
           <Popover.Content>
-            <Text
-              css={{
-                px: '$4',
-                py: '$4',
-                fontSize: '0.875rem',
-                color: '$error',
-              }}
-            >
-              <RiErrorWarningFill size={14} /> No dejes campos vacíos
+            <Text css={{ px: '$4', py: '$4', fontSize: '0.875rem', color: '$error' }}>
+              <RiErrorWarningFill size={14} />
+              {` ${message}`}
             </Text>
           </Popover.Content>
         </Popover>

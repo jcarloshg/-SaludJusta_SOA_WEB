@@ -1,20 +1,13 @@
 import { useEffect, useState } from 'react'
 import { getAvailableHoursDay, requesExamTypes } from '../services'
 
-const capitalize = (str) => `${str.charAt(0).toUpperCase()}${str.slice(1)}`
+const capitalize = str => `${str.charAt(0).toUpperCase()}${str.slice(1)}`
 
 function useCreateAppointment() {
-  const [email, setEmail] = useState('')
-  const [typeOfExams, setTypeOfExams] = useState('AUDIOMETRÍA')
+  const [typeOfExam, setTypeOfExam] = useState('AUDIOMETRÍA')
   const [typesOfExams, setTypesOfExams] = useState([])
   const [date, setDate] = useState(new Date())
   const [availableSchedules, setAvailableSchedules] = useState([])
-  const [currentComponent, setCurrentComponent] = useState('SearchCustomer')
-  const [visible, setVisible] = useState(true)
-
-  const onGoToSearchCustomer = () => setCurrentComponent('SearchCustomer')
-  const onGoToSelectAppointment = () => setCurrentComponent('SelectAppointment')
-  const onGoToCreateCustomer = () => setCurrentComponent('CreateCustomer')
 
   useEffect(() => {
     const fetchTypesOfExams = async () => {
@@ -22,7 +15,7 @@ function useCreateAppointment() {
       console.log(`[typos] -> `, res)
 
       if (res !== null) {
-        const types = res.data.map((type) => ({
+        const types = res.data.map(type => ({
           value: type.typeExam,
           label: capitalize(type.typeExam.toLowerCase()),
         }))
@@ -34,26 +27,22 @@ function useCreateAppointment() {
     fetchTypesOfExams()
   }, [])
 
-  const onChangeEmail = (event) => {
-    setEmail(event.target.value)
-  }
-
-  const onChangeTypeOfExam = (event) => {
+  const onChangeTypeOfExam = event => {
     console.log(`[onChangeTypeOfExam] -> `, event.target.value)
-    setTypeOfExams(event.target.value)
+    setTypeOfExam(event.target.value)
   }
 
-  const onChangeDate = async (event) => {
+  const onChangeDate = async event => {
     setDate(event)
     const dateStr = event.toISOString().slice(0, 10)
-    const res = await getAvailableHoursDay(typeOfExams, dateStr)
+    const res = await getAvailableHoursDay(typeOfExam, dateStr)
 
     if (res === null) {
       setAvailableSchedules([])
       return
     }
 
-    const availableHours = res.data.map((schedule) => ({
+    const availableHours = res.data.map(schedule => ({
       id: schedule.idAppointment,
       date: schedule.date,
       time: schedule.time,
@@ -62,26 +51,13 @@ function useCreateAppointment() {
     setAvailableSchedules(availableHours)
   }
 
-  const closeHandler = () => {
-    setVisible(false)
-    console.log('closed')
-  }
-
   return {
-    email,
-    typeOfExams,
-    typesOfExams,
     date,
+    typeOfExam,
+    typesOfExams,
     availableSchedules,
-    currentComponent,
-    visible,
-    onGoToSearchCustomer,
-    onGoToSelectAppointment,
-    onGoToCreateCustomer,
-    onChangeEmail,
     onChangeTypeOfExam,
     onChangeDate,
-    closeHandler,
   }
 }
 

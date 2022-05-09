@@ -9,6 +9,10 @@ const actions = {
   onPreviusStep: 'ON_PREVIUS_STEP',
   onOpenPopover: 'ON_OPEN_POPOVER',
   onClosePopover: 'ON_CLOSE_POPOVER',
+  onLoading: 'ON_LOADING',
+  onStopLoading: 'ON_STOP_LOADING',
+  onChangeMessage: 'ON_CHANGE_MESSAGE',
+  onClear: 'ON_CLEAR',
 }
 
 export default actions
