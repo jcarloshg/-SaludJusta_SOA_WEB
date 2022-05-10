@@ -5,7 +5,7 @@ import { AppointmentsContext } from '../HomeAppointments/contexts/AppointmentsCo
 import { createCustomerButton, searchButton } from './components'
 
 function SearchCustomer() {
-  const { email, loading, onChangeEmail, onCreateCustomerShow, onSearchCustomer } =
+  const { commonState, onChangeEmail, onShowCreateCustomer, onSearchCustomer } =
     useContext(AppointmentsContext)
 
   return (
@@ -17,7 +17,7 @@ function SearchCustomer() {
         <Input
           label="Correo electrónico"
           placeholder="correo@ejemplo.com"
-          value={email}
+          value={commonState.email}
           onChange={onChangeEmail}
           autoComplete="off"
           bordered
@@ -26,14 +26,23 @@ function SearchCustomer() {
           css={{ width: '330px' }}
         />
         <Spacer y={1} />
-        <Button onClick={onSearchCustomer} auto disabled={loading} css={searchButton}>
-          {!loading ? 'Buscar' : <Loading size="sm" type="spinner" color="white" />}
+        <Button
+          auto
+          onClick={onSearchCustomer}
+          disabled={commonState.loading}
+          css={searchButton}
+        >
+          {!commonState.loading ? (
+            'Buscar'
+          ) : (
+            <Loading size="sm" type="spinner" color="white" />
+          )}
         </Button>
         <Spacer y={0.5} />
         <Button
-          onClick={onCreateCustomerShow}
           auto
-          disabled={loading}
+          onClick={onShowCreateCustomer}
+          disabled={commonState.loading}
           css={createCustomerButton}
         >
           Crear nuevo cliente

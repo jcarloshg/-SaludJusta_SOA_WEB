@@ -7,7 +7,7 @@ import { ModalInfo } from './components'
 import './CreateAppointment.css'
 
 function CreateAppointment() {
-  const { commonState, onCreateCustomerHide, onHideInfo } =
+  const { commonState, onHideCreateCustomer, onHideInfo } =
     useContext(AppointmentsContext)
 
   return (
@@ -18,7 +18,7 @@ function CreateAppointment() {
       </main>
       <CreateCustomer
         visible={commonState.CreateCustomerVisible}
-        closeHandler={onCreateCustomerHide}
+        closeHandler={onHideCreateCustomer}
       />
       <ModalInfo
         message={commonState.infoMessage}
