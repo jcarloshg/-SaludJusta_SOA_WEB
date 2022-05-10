@@ -1,88 +1,62 @@
-import { createContext, useState } from 'react'
+import { createContext, useReducer } from 'react'
 import { existAccount } from '../../CreateAppointment/services'
+import { appointmentsActions as actions, initialAppointments } from '../models'
+import appointmentsReducer from '../reducers/appointmentsReducer'
 
 const AppointmentsContext = createContext()
 
 const AppointmentsProvider = ({ children }) => {
-  const [email, setEmail] = useState('')
-  const [currentScreen, setCurrentScreen] = useState('SearchCustomer')
-  const [createCustomerVisible, setCreateCustomerVisible] = useState(false)
-  const [infoVisible, setInfoVisible] = useState(false)
-  const [infoMessage, setInfoMessage] = useState('Usuario creado correctamente')
-  const [loading, setLoading] = useState(false)
+  const [commonState, dispatch] = useReducer(appointmentsReducer, initialAppointments)
 
-  const [idUser, setIdUser] = useState('')
-  const [idExamCatalog, setIdExamCatalog] = useState('')
-  const [idAppointment, setIdAppointment] = useState('')
-
-  const onInfoHide = () => setInfoVisible(false)
-  const onCreateCustomerHide = () => setCreateCustomerVisible(false)
-  const goToSelectAppointment = () => setCurrentScreen('SelectAppointment')
-  const onChangeEmail = e => setEmail(e.target.value)
-
-  const goToSearchCustomer = () => {
-    setEmail('')
-    setCurrentScreen('SearchCustomer')
-  }
-
-  const onCreateCustomerShow = () => {
-    setInfoVisible(false)
-    setCreateCustomerVisible(true)
-  }
-
-  const onInfoShow = () => {
-    setCreateCustomerVisible(false)
-    setInfoVisible(true)
-  }
+  const dispatchState = (type, payload) => dispatch({ type, payload })
+  const onChangeEmail = e => dispatchState(actions.onChangeEmail, e.target.value)
+  const goToSearchCustomer = () => dispatch({ type: actions.onGoToSearchCustomer })
+  const goToSelectAppointment = () => dispatch({ type: actions.onGoToSelectAppointment })
+  const onShowCreateCustomer = () => dispatch({ type: actions.onShowCreateCustomer })
+  const onHideCreateCustomer = () => dispatch({ type: actions.onHideCreateCustomer })
+  const onShowInfo = () => dispatch({ type: actions.onShowInfo })
+  const onHideInfo = () => dispatch({ type: actions.onHideInfo })
+  const onLoading = () => dispatch({ type: actions.onLoading })
+  const onError = msg => dispatchState(actions.onError, msg)
+  const onClear = () => dispatch({ type: actions.onClear })
+  const onSetIdUser = value => dispatchState(actions.onSetIdUser, value)
+  const onSetIdExamCatalog = value => dispatchState(actions.onSetIdExamCatalog, value)
+  const onSetIdAppointment = value => dispatchState(actions.onSetIdAppointment, value)
 
   const onSearchCustomer = async () => {
-    setLoading(true)
+    onLoading()
 
-    if (email === '') {
-      setInfoMessage('Por favor ingrese un correo electrónico')
-      onInfoShow()
-      setLoading(false)
+    if (commonState.email === '') {
+      onError('Por favor ingrese un correo electrónico')
       return
     }
 
-    const res = await existAccount(email)
+    const res = await existAccount(commonState.email)
 
     if (res === null) {
-      setInfoMessage('El correo electrónico no existe')
-      onInfoShow()
-      setEmail('')
-      setLoading(false)
+      onError('El correo electrónico no existe')
       return
     }
 
-    setLoading(false)
-    setCurrentScreen('SelectAppointment')
+    goToSelectAppointment()
   }
 
   return (
     <AppointmentsContext.Provider
       value={{
-        email,
-        currentScreen,
-        createCustomerVisible,
-        infoVisible,
-        infoMessage,
-        loading,
+        commonState,
         onChangeEmail,
-        setInfoMessage,
-        onCreateCustomerShow,
-        onCreateCustomerHide,
-        onInfoShow,
-        onInfoHide,
+        onShowCreateCustomer,
+        onHideCreateCustomer,
+        onShowInfo,
+        onHideInfo,
         goToSearchCustomer,
         goToSelectAppointment,
         onSearchCustomer,
-        idUser,
-        setIdUser,
-        idExamCatalog,
-        setIdExamCatalog,
-        idAppointment,
-        setIdAppointment,
+        onSetIdUser,
+        onSetIdExamCatalog,
+        onSetIdAppointment,
+        onClear,
       }}
     >
       {children}
