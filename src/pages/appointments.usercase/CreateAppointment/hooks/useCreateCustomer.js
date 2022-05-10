@@ -1,37 +1,33 @@
 import { useContext, useReducer } from 'react'
-import initialUser from '../models/initial-user'
-import userReducer from '../reducers/userReducer'
 import { createAccount } from '../services'
-import actions from '../models/user-actions'
-import { AppointmentsContext } from '../../HomeAppointments/contexts/AppointmentsContext'
+import { AppointmentsContext as context } from '../../HomeAppointments/contexts/AppointmentsContext'
+import { initialUser, userActions as actions, userReducer } from '../reducers'
 
 function useCreateCustomer(closeHandler = () => null) {
-  const { setInfoMessage, onInfoShow, goToSelectAppointment } =
-    useContext(AppointmentsContext)
+  const { onChangeInfoMsg, onShowInfo, goToSelectAppt } = useContext(context)
   const [user, dispatch] = useReducer(userReducer, initialUser)
 
   const userDispatch = (type = '', payload = null) => dispatch({ type, payload })
+
   const onChangeName = e => userDispatch(actions.onChangeName, e.target.value)
   const onChangeLastName = e => userDispatch(actions.onChangeLastName, e.target.value)
   const onChangeAge = e => userDispatch(actions.onChangeAge, e.target.value)
   const onChangeGender = e => userDispatch(actions.onChangeGender, e.target.value)
   const onChangeEmail = e => userDispatch(actions.onChangeEmail, e.target.value)
   const onChangePhone = e => userDispatch(actions.onChangePhone, e.target.value)
+
   const onNextStep = () => dispatch({ type: actions.onNextStep })
   const onPreviusStep = () => dispatch({ type: actions.onPreviusStep })
-  const onOpenPopover = () => dispatch({ type: actions.onOpenPopover })
   const onClosePopover = () => dispatch({ type: actions.onClosePopover })
   const onLoading = () => dispatch({ type: actions.onLoading })
-  const onStopLoading = () => dispatch({ type: actions.onStopLoading })
-  const onChangeMessage = (msg = '') => userDispatch(actions.onChangeMessage, msg)
-  const onEmptyFieldsMsg = () => onChangeMessage('No dejes campos vacíos')
-  const onErrorMessage = () => onChangeMessage('Error al crear el usuario')
+
   const onClear = () => dispatch({ type: actions.onClear })
+  const onEmptyFields = () => dispatch({ type: actions.onEmptyFields })
+  const onError = () => dispatch({ type: actions.onError })
 
   const goToNextStep = () => {
     if (user.name === '' || user.lastName === '' || user.age < 18) {
-      onEmptyFieldsMsg()
-      onOpenPopover()
+      onEmptyFields()
       return
     }
     onNextStep()
@@ -41,24 +37,22 @@ function useCreateCustomer(closeHandler = () => null) {
     onLoading()
     const res = await createAccount(user)
     if (res === null) {
-      onErrorMessage()
-      onStopLoading()
-      onOpenPopover()
+      onError()
       return
     }
     console.log('createCustomer', res)
-    onStopLoading()
+
     onClear()
     closeHandler()
-    setInfoMessage('Usuario creado correctamente')
-    onInfoShow()
-    goToSelectAppointment()
+
+    onChangeInfoMsg('Usuario creado correctamente')
+    onShowInfo()
+    goToSelectAppt()
   }
 
   const onSaveCustomer = async () => {
     if (user.email === '' || user.phone === '') {
-      onEmptyFieldsMsg()
-      onOpenPopover()
+      onEmptyFields()
       return
     }
     await createCustomer()

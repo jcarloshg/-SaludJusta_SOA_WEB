@@ -1,12 +1,18 @@
 import { Button, Input, Loading, Spacer } from '@nextui-org/react'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { Subtitle, Title } from '../../../components'
-import { AppointmentsContext } from '../HomeAppointments/contexts/AppointmentsContext'
+import { AppointmentsContext as context } from '../HomeAppointments/contexts/AppointmentsContext'
 import { createCustomerButton, searchButton } from './components'
 
 function SearchCustomer() {
-  const { commonState, onChangeEmail, onShowCreateCustomer, onSearchCustomer } =
-    useContext(AppointmentsContext)
+  const { ctxState, onShowCreateCust, onSearchCustomer } = useContext(context)
+
+  const [email, setEmail] = useState('')
+  const onChangeEmail = e => setEmail(e.target.value)
+
+  const onSearch = async () => {
+    await onSearchCustomer(email)
+  }
 
   return (
     <article className="col full-width create-appointment-container">
@@ -17,7 +23,7 @@ function SearchCustomer() {
         <Input
           label="Correo electrónico"
           placeholder="correo@ejemplo.com"
-          value={commonState.email}
+          value={email}
           onChange={onChangeEmail}
           autoComplete="off"
           bordered
@@ -26,13 +32,8 @@ function SearchCustomer() {
           css={{ width: '330px' }}
         />
         <Spacer y={1} />
-        <Button
-          auto
-          onClick={onSearchCustomer}
-          disabled={commonState.loading}
-          css={searchButton}
-        >
-          {!commonState.loading ? (
+        <Button auto onClick={onSearch} disabled={ctxState.loading} css={searchButton}>
+          {!ctxState.loading ? (
             'Buscar'
           ) : (
             <Loading size="sm" type="spinner" color="white" />
@@ -41,8 +42,8 @@ function SearchCustomer() {
         <Spacer y={0.5} />
         <Button
           auto
-          onClick={onShowCreateCustomer}
-          disabled={commonState.loading}
+          onClick={onShowCreateCust}
+          disabled={ctxState.loading}
           css={createCustomerButton}
         >
           Crear nuevo cliente

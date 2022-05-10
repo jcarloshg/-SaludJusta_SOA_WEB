@@ -7,22 +7,21 @@ import { ModalInfo } from './components'
 import './CreateAppointment.css'
 
 function CreateAppointment() {
-  const { commonState, onHideCreateCustomer, onHideInfo } =
-    useContext(AppointmentsContext)
+  const { ctxState, onHideCreateCust, onHideInfo } = useContext(AppointmentsContext)
 
   return (
     <>
       <main className="row create-appointment-main">
-        {commonState.currentScreen === 'SearchCustomer' && <SearchCustomer />}
-        {commonState.currentScreen === 'SelectAppointment' && <SelectAppointment />}
+        {ctxState.screen === 'SearchCustomer' && <SearchCustomer />}
+        {ctxState.screen === 'SelectAppointment' && <SelectAppointment />}
       </main>
       <CreateCustomer
-        visible={commonState.CreateCustomerVisible}
-        closeHandler={onHideCreateCustomer}
+        visible={ctxState.createCustVisible}
+        closeHandler={onHideCreateCust}
       />
       <ModalInfo
-        message={commonState.infoMessage}
-        open={commonState.infoVisible}
+        message={ctxState.infoMessage}
+        open={ctxState.infoVisible}
         onClose={onHideInfo}
       />
     </>

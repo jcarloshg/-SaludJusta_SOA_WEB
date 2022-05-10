@@ -7,7 +7,7 @@ import { AvailableAppointments } from './components'
 import useCreateAppointment from './hooks/useCreateAppointment'
 
 function SelectAppointment() {
-  const { goToSearchCustomer } = useContext(AppointmentsContext)
+  const { goToSearchCust } = useContext(AppointmentsContext)
   const {
     date,
     typeOfExam,
@@ -15,11 +15,12 @@ function SelectAppointment() {
     availableSchedules,
     onChangeTypeOfExam,
     onChangeDate,
+    onSelectAppt,
   } = useCreateAppointment()
 
   return (
     <article className="col full-width select-appointment-container">
-      <GoBackButton onClick={goToSearchCustomer} />
+      <GoBackButton onClick={goToSearchCust} />
       <Title>Crear Cita</Title>
       <Subtitle>Selecciona el tipo de examan, la hora y la fecha.</Subtitle>
       <div className="select-appointment col center">
@@ -43,7 +44,7 @@ function SelectAppointment() {
       <Spacer y={1} />
       <Subtitle>Horarios disponibles</Subtitle>
       <div className="full-width col center">
-        <AvailableAppointments list={availableSchedules} />
+        <AvailableAppointments list={availableSchedules} func={onSelectAppt} />
       </div>
     </article>
   )

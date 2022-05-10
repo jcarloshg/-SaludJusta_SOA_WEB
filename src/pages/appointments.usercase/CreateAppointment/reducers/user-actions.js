@@ -1,4 +1,5 @@
-const actions = {
+const userActions = {
+  onChangeField: 'ON_CHANGE_FIELD',
   onChangeName: 'ON_CHANGE_NAME',
   onChangeLastName: 'ON_CHANGE_LAST_NAME',
   onChangeAge: 'ON_CHANGE_AGE',
@@ -13,6 +14,9 @@ const actions = {
   onStopLoading: 'ON_STOP_LOADING',
   onChangeMessage: 'ON_CHANGE_MESSAGE',
   onClear: 'ON_CLEAR',
+
+  onEmptyFields: 'ON_EMPTY_FIELDS',
+  onError: 'ON_ERROR',
 }
 
-export default actions
+export default userActions

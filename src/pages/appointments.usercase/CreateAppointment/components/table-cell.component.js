@@ -1,17 +1,13 @@
 import { Row, Text } from '@nextui-org/react'
 import { SecondaryButton } from '../../../../components'
 
-function TableCell(row, columnKey) {
+function TableCell(row, columnKey, func = () => null) {
   const cellValue = row[columnKey]
 
   if (columnKey === 'accion') {
     return (
       <Row justify="center">
-        <SecondaryButton
-          func={() => console.log('onClick not defined', cellValue)}
-          text="Seleccionar"
-          width="100px"
-        />
+        <SecondaryButton func={() => func(cellValue)} text="Seleccionar" width="96px" />
       </Row>
     )
   }

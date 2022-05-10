@@ -1,7 +1,7 @@
 import { Table, Text } from '@nextui-org/react'
 import tableCell from './table-cell.component'
 
-function AvailableAppointments({ list }) {
+function AvailableAppointments({ list, func = () => null }) {
   const columns = [
     { name: 'Fecha', uid: 'date' },
     { name: 'Hora', uid: 'time' },
@@ -31,7 +31,7 @@ function AvailableAppointments({ list }) {
         <Table.Body items={list}>
           {item => (
             <Table.Row>
-              {columnKey => <Table.Cell>{tableCell(item, columnKey)}</Table.Cell>}
+              {columnKey => <Table.Cell>{tableCell(item, columnKey, func)}</Table.Cell>}
             </Table.Row>
           )}
         </Table.Body>

@@ -1,61 +1,64 @@
 import { createContext, useReducer } from 'react'
 import { existAccount } from '../../CreateAppointment/services'
-import { appointmentsActions as actions, initialAppointments } from '../models'
-import appointmentsReducer from '../reducers/appointmentsReducer'
+import {
+  appointmentsActions as actions,
+  appointmentsReducer as reducer,
+  initialAppointments,
+} from '../reducers'
 
 const AppointmentsContext = createContext()
 
 const AppointmentsProvider = ({ children }) => {
-  const [commonState, dispatch] = useReducer(appointmentsReducer, initialAppointments)
+  const [ctxState, dispatch] = useReducer(reducer, initialAppointments)
 
-  const dispatchState = (type, payload) => dispatch({ type, payload })
-  const onChangeEmail = e => dispatchState(actions.onChangeEmail, e.target.value)
-  const goToSearchCustomer = () => dispatch({ type: actions.onGoToSearchCustomer })
-  const goToSelectAppointment = () => dispatch({ type: actions.onGoToSelectAppointment })
-  const onShowCreateCustomer = () => dispatch({ type: actions.onShowCreateCustomer })
-  const onHideCreateCustomer = () => dispatch({ type: actions.onHideCreateCustomer })
+  const dispatchState = (type = '', payload = null) => dispatch({ type, payload })
+  const goToSearchCust = () => dispatch({ type: actions.onGoToSearchCust })
+  const goToSelectAppt = () => dispatch({ type: actions.onGoToSelectAppt })
+  const onShowCreateCust = () => dispatch({ type: actions.onShowCreateCust })
+  const onHideCreateCust = () => dispatch({ type: actions.onHideCreateCust })
   const onShowInfo = () => dispatch({ type: actions.onShowInfo })
   const onHideInfo = () => dispatch({ type: actions.onHideInfo })
   const onLoading = () => dispatch({ type: actions.onLoading })
-  const onError = msg => dispatchState(actions.onError, msg)
+  const onChangeInfoMsg = (msg = '') => dispatchState(actions.onChangeInfoMsg, msg)
+  const onError = (msg = '') => dispatchState(actions.onError, msg)
   const onClear = () => dispatch({ type: actions.onClear })
-  const onSetIdUser = value => dispatchState(actions.onSetIdUser, value)
-  const onSetIdExamCatalog = value => dispatchState(actions.onSetIdExamCatalog, value)
-  const onSetIdAppointment = value => dispatchState(actions.onSetIdAppointment, value)
+  const onSetIdUser = (id = '') => dispatchState(actions.onSetIdUser, id)
+  const onSetIdExamCtlg = (id = '') => dispatchState(actions.onSetIdExamCtlg, id)
+  const onSetIdAppt = (id = '') => dispatchState(actions.onSetIdAppt, id)
 
-  const onSearchCustomer = async () => {
+  const onSearchCustomer = async (email = '') => {
     onLoading()
 
-    if (commonState.email === '') {
+    if (email === '') {
       onError('Por favor ingrese un correo electrónico')
       return
     }
 
-    const res = await existAccount(commonState.email)
+    const res = await existAccount(email)
 
     if (res === null) {
       onError('El correo electrónico no existe')
       return
     }
 
-    goToSelectAppointment()
+    onSetIdUser(res.data.idUser)
+    goToSelectAppt()
   }
 
   return (
     <AppointmentsContext.Provider
       value={{
-        commonState,
-        onChangeEmail,
-        onShowCreateCustomer,
-        onHideCreateCustomer,
+        ctxState,
+        onShowCreateCust,
+        onHideCreateCust,
         onShowInfo,
         onHideInfo,
-        goToSearchCustomer,
-        goToSelectAppointment,
+        onChangeInfoMsg,
+        goToSearchCust,
+        goToSelectAppt,
         onSearchCustomer,
-        onSetIdUser,
-        onSetIdExamCatalog,
-        onSetIdAppointment,
+        onSetIdExamCtlg,
+        onSetIdAppt,
         onClear,
       }}
     >
