@@ -2,8 +2,8 @@ import { Button, Loading, Spacer } from '@nextui-org/react'
 import { useContext, useState } from 'react'
 import { Subtitle, Title } from '../../../components'
 import { AppointmentsContext as context } from '../HomeAppointments/contexts/AppointmentsContext'
-import { createCustomerButton, searchButton } from './components'
 import { InputEmail } from './components/Input'
+import { createCustomerButton, searchButton } from './components/styles'
 
 function SearchCustomer() {
   const { ctxState, onShowCreateCust, onSearchCustomer } = useContext(context)

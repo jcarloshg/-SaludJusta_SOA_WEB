@@ -1,3 +1,3 @@
-export { default as appointmentsActions } from './appointments-actions'
-export { default as appointmentsReducer } from './appointments-reducer'
-export { default as initialAppointments } from './initial-appointments'
+export { default as contextActions } from './context-actions'
+export { default as contextReducer } from './context-reducer'
+export { default as initialContext } from './initial-context'

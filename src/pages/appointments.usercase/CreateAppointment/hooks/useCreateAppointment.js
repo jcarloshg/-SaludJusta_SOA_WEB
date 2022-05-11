@@ -1,41 +1,44 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useReducer } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { dateToStringYYYYMMDD } from '../../../../utilities/date/dateToStringYYYYMMDD'
 import { AppointmentsContext as context } from '../../HomeAppointments/contexts/AppointmentsContext'
-import {
-  getAvailableHoursDay,
-  mappingExamTypes,
-  mappingSchedules,
-  requesExamTypes,
-  updateAppointment,
-} from '../services'
+import { appointmentActions as actions, appointmentReducer, initialAppointment } from '../reducers'
+import { findIdExam, mappingExamTypes, mappingSchedules } from '../services'
+import { getAvailableHoursDay, requesExamTypes, updateAppt } from '../services/requests'
 
 function useCreateAppointment() {
-  const { ctxState, onSetIdExamCtlg } = useContext(context)
+  const navigate = useNavigate()
+  const { ctxState, onSetIdAppt, onSetIdExamCtlg, onApptSelected, onError, onHideInfo } =
+    useContext(context)
+  const [appt, dispatch] = useReducer(appointmentReducer, initialAppointment)
 
-  const [typeOfExam, setTypeOfExam] = useState('')
-  const [typesOfExams, setTypesOfExams] = useState([])
-  const [date, setDate] = useState(new Date())
-  const [availableSchedules, setAvailableSchedules] = useState([])
+  const apptDispatch = (type = '', payload = null) => dispatch({ type, payload })
+  const onEmptyScheds = () => dispatch({ type: actions.onEmptySchedules })
+  const onFillScheds = (scheds = []) => apptDispatch(actions.onFillSchedules, scheds)
+  const onFillExams = (exams = []) => apptDispatch(actions.onFillExams, exams)
+  const onSetTypeOfExam = (type = '') => apptDispatch(actions.onSetTypeOfExam, type)
+  const onSetDate = (date = new Date()) => apptDispatch(actions.onSetDate, date)
+  const onSelectAppt = (time = '') => apptDispatch(actions.onSelectAppt, time)
+  const onLoading = () => dispatch({ type: actions.onLoading })
+  const onCloseConfirm = () => dispatch({ type: actions.onCloseConfirm })
+  const onReset = () => dispatch({ type: actions.onReset })
 
   const fetchAvailableHours = async (typeExam = '', dateStr = '') => {
     const res = await getAvailableHoursDay(typeExam, dateStr)
-    if (res === null) {
-      setAvailableSchedules([])
-      return
-    }
+    if (res === null) return onEmptyScheds()
     const availableHours = mappingSchedules(res.data)
-    setAvailableSchedules(availableHours)
+    onFillScheds(availableHours)
   }
 
   useEffect(() => {
     const fetchTypesOfExams = async () => {
       const res = await requesExamTypes()
-
       if (res !== null) {
         const types = mappingExamTypes(res.data)
-        setTypesOfExams(types)
-        setTypeOfExam(types[0].value)
+        onFillExams(types)
+        onSetTypeOfExam(types[0].value)
         onSetIdExamCtlg(types[0].idExamCatalog)
-        const dateStr = date.toISOString().slice(0, 10)
+        const dateStr = dateToStringYYYYMMDD(appt.date)
         await fetchAvailableHours(types[0].value, dateStr)
       }
     }
@@ -46,41 +49,50 @@ function useCreateAppointment() {
 
   const onChangeTypeOfExam = async event => {
     const typeExam = event.target.value
-    const idExam = typesOfExams.find(type => type.value === typeExam).idExamCatalog
-
-    setTypeOfExam(event.target.value)
+    const idExam = findIdExam(appt.typesOfExams, typeExam)
+    onSetTypeOfExam(typeExam)
     onSetIdExamCtlg(idExam)
-
-    const dateStr = date.toISOString().slice(0, 10)
+    const dateStr = dateToStringYYYYMMDD(appt.date)
     await fetchAvailableHours(event.target.value, dateStr)
   }
 
   const onChangeDate = async event => {
-    setDate(event)
-    const dateStr = event.toISOString().slice(0, 10)
-    await fetchAvailableHours(typeOfExam, dateStr)
+    onSetDate(event)
+    const dateStr = dateToStringYYYYMMDD(event)
+    await fetchAvailableHours(appt.typeOfExam, dateStr)
   }
 
-  const onSelectAppt = async (idAppt = '') => {
-    console.log('idAppt', idAppt)
-    console.log('idExam', ctxState.idExamCatalog)
-    console.log('idUser', ctxState.idUser)
-    // const res = await updateAppointment({
-    //   idUser: ctxState.idUser,
-    //   idExam: ctxState.idExamCatalog,
-    //   idAppointment: idAppt,
-    // })
-    // console.log('res', res)
+  const onSelectAppointment = async (idAppt = '', appt = { time: '' }) => {
+    onSetIdAppt(idAppt)
+    onSelectAppt(appt.time)
+  }
+
+  const onConfirmSelectAppt = async () => {
+    onLoading()
+    const res = await updateAppt({
+      idUser: ctxState.idUser,
+      idExam: ctxState.idExamCatalog,
+      idAppointment: ctxState.idAppointment,
+    })
+    if (res === null) return onError('Error al actualizar la cita')
+
+    const dateStr = dateToStringYYYYMMDD(appt.date)
+    onApptSelected(appt.typeOfExam, appt.time.slice(0, 5), dateStr)
+    onReset()
+
+    setTimeout(() => {
+      onHideInfo()
+      navigate('/HomeAppointments')
+    }, 2000)
   }
 
   return {
-    date,
-    typeOfExam,
-    typesOfExams,
-    availableSchedules,
+    appt,
     onChangeTypeOfExam,
     onChangeDate,
-    onSelectAppt,
+    onSelectAppointment,
+    onCloseConfirm,
+    onConfirmSelectAppt,
   }
 }
 

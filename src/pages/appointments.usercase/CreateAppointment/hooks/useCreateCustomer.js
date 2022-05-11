@@ -1,5 +1,5 @@
 import { useContext, useReducer } from 'react'
-import { createAccount } from '../services'
+import { createAccount } from '../services/requests'
 import { AppointmentsContext as context } from '../../HomeAppointments/contexts/AppointmentsContext'
 import { initialUser, userActions as actions, userReducer } from '../reducers'
 import { validateEmail, validatePhone } from '../../../../utilities'

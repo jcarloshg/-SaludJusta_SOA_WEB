@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const qs = require('qs')
 
-async function updateAppointment({ idUser = '', idExam = '', idAppointment = '' }) {
+async function updateAppt({ idUser = '', idExam = '', idAppointment = '' }) {
   try {
     const url = `${process.env.REACT_APP_URL}${process.env.REACT_APP_API_APPOINTMENT}/updateAppointment`
     const data = qs.stringify({
@@ -25,4 +25,4 @@ async function updateAppointment({ idUser = '', idExam = '', idAppointment = '' 
   }
 }
 
-export default updateAppointment
+export default updateAppt

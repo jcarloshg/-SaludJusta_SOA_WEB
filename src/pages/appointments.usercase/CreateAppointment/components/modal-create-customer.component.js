@@ -1,7 +1,7 @@
 import { Button, Loading, Modal, Popover, Row, Text } from '@nextui-org/react'
 import { Subtitle, Title } from '../../../../components'
 import { RiErrorWarningFill } from 'react-icons/ri'
-import modalButton from './modal-button.style'
+import { errorButton, modalButton } from './styles'
 
 function ModalCreateCustomer({
   open = false,
@@ -31,13 +31,7 @@ function ModalCreateCustomer({
       </Modal.Header>
       <Modal.Body>{children}</Modal.Body>
       <Modal.Footer>
-        <Button
-          flat
-          auto
-          css={{ backgroundColor: '$error', color: '$white' }}
-          onClick={onClose}
-          disabled={loading}
-        >
+        <Button flat auto css={errorButton} onClick={onClose} disabled={loading}>
           Cancelar
         </Button>
         <Popover placement="top" isOpen={openPopover} onOpenChange={onOpenChange}>

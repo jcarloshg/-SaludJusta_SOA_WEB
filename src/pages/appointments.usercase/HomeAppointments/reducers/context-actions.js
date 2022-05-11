@@ -1,4 +1,4 @@
-const appointmentsActions = {
+const contextActions = {
   onGoToSearchCust: 'ON_GO_TO_SEARCH_CUSTOMER',
   onGoToSelectAppt: 'ON_GO_TO_SELECT_APPOINTMENT',
   onShowCreateCust: 'ON_SHOW_CREATE_CUSTOMER',
@@ -15,4 +15,4 @@ const appointmentsActions = {
   onSetIdAppt: 'ON_SET_ID_APPOINTMENT',
 }
 
-export default appointmentsActions
+export default contextActions

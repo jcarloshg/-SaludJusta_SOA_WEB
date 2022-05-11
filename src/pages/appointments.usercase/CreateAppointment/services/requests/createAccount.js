@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { generatePassword } from '../../../../utilities'
+import { generatePassword } from '../../../../../utilities'
 
 const qs = require('qs')
 
@@ -27,7 +27,7 @@ async function createAccount({
       method: 'post',
       url,
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
       data,
     }

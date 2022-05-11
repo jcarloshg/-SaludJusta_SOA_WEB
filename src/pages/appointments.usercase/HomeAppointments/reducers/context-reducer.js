@@ -1,4 +1,4 @@
-import { appointmentsActions as actions } from './'
+import { contextActions as actions } from './'
 
 const reducerObject = (state, payload) => ({
   [actions.onGoToSearchCust]: { ...state, screen: 'SearchCustomer' },
@@ -44,10 +44,10 @@ const reducerObject = (state, payload) => ({
   [actions.onSetIdAppt]: { ...state, idAppointment: payload },
 })
 
-const appointmentsReducer = (state, action) => {
+const contextReducer = (state, action) => {
   const { type, payload } = action
   const reducer = reducerObject(state, payload)
   return reducer[type] || state
 }
 
-export default appointmentsReducer
+export default contextReducer

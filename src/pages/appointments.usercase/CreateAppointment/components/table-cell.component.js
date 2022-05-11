@@ -7,7 +7,11 @@ function TableCell(row, columnKey, func = () => null) {
   if (columnKey === 'accion') {
     return (
       <Row justify="center">
-        <SecondaryButton func={() => func(cellValue)} text="Seleccionar" width="96px" />
+        <SecondaryButton
+          func={() => func(cellValue, row)}
+          text="Seleccionar"
+          width="96px"
+        />
       </Row>
     )
   }

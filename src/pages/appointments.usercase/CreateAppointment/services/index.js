@@ -1,7 +1,3 @@
-export { default as createAccount } from './createAccount'
-export { default as existAccount } from './existAccount'
-export { default as getAvailableHoursDay } from './getAvailableHoursDay'
-export { default as requesExamTypes } from './requesExamTypes'
-export { default as updateAppointment } from './updateAppointment'
 export { default as mappingExamTypes } from './mappingExamTypes'
 export { default as mappingSchedules } from './mappingSchedules'
+export { default as findIdExam } from './findIdExam'

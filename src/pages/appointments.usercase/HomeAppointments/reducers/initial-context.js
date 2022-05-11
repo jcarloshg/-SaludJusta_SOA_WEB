@@ -1,4 +1,4 @@
-const initialAppointments = {
+const initialContex = {
   idUser: '',
   idExamCatalog: '',
   idAppointment: '',
@@ -9,4 +9,4 @@ const initialAppointments = {
   loading: false,
 }
 
-export default initialAppointments
+export default initialContex

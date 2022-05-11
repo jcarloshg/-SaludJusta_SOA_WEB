@@ -1,4 +1,4 @@
-import { Table, Text } from '@nextui-org/react'
+import { Spacer, Table, Text } from '@nextui-org/react'
 import tableCell from './table-cell.component'
 
 function AvailableAppointments({ list, func = () => null }) {
@@ -20,10 +20,7 @@ function AvailableAppointments({ list, func = () => null }) {
       >
         <Table.Header columns={columns}>
           {column => (
-            <Table.Column
-              key={column.uid}
-              align={column.uid === 'accion' ? 'center' : 'start'}
-            >
+            <Table.Column key={column.uid} align={column.uid === 'accion' ? 'center' : 'start'}>
               {column.name}
             </Table.Column>
           )}
@@ -36,7 +33,7 @@ function AvailableAppointments({ list, func = () => null }) {
           )}
         </Table.Body>
       </Table>
-
+      <Spacer y={0.8} />
       {list.length === 0 && (
         <Text size={16} color="#028174" weight="medium">
           No hay citas disponibles :c
