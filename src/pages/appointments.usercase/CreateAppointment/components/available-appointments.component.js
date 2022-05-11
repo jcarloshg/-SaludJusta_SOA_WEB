@@ -1,5 +1,6 @@
-import { Spacer, Table, Text } from '@nextui-org/react'
+import { Row, Spacer, Table, Text } from '@nextui-org/react'
 import tableCell from './table-cell.component'
+import { FcHighPriority } from 'react-icons/fc'
 
 function AvailableAppointments({ list, func = () => null }) {
   const columns = [
@@ -35,9 +36,13 @@ function AvailableAppointments({ list, func = () => null }) {
       </Table>
       <Spacer y={0.8} />
       {list.length === 0 && (
-        <Text size={16} color="#028174" weight="medium">
-          No hay citas disponibles :c
-        </Text>
+        <Row justify="center">
+          <FcHighPriority />
+          <Spacer x={0.5} />
+          <Text size={16} weight="medium">
+            No hay citas disponibles
+          </Text>
+        </Row>
       )}
     </>
   )
