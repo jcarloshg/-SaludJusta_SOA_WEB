@@ -10,15 +10,13 @@ const reducerObject = (state, payload) => ({
   [actions.onShowCreateCust]: {
     ...state,
     createCustVisible: true,
-    infoVisible: false,
   },
   [actions.onHideCreateCust]: {
     ...state,
     createCustVisible: false,
-    infoVisible: false,
   },
-  [actions.onShowInfo]: { ...state, infoVisible: true, createCustVisible: false },
-  [actions.onHideInfo]: { ...state, infoVisible: false, createCustVisible: false },
+  [actions.onShowInfo]: { ...state, infoVisible: true },
+  [actions.onHideInfo]: { ...state, infoVisible: false },
   [actions.onChangeInfoMsg]: { ...state, infoMessage: payload },
   [actions.onLoading]: { ...state, loading: true },
   [actions.onStopLoading]: { ...state, loading: false },

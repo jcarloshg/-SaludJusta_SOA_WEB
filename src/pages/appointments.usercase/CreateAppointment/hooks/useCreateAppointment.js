@@ -8,7 +8,7 @@ import { getAvailableHoursDay, requesExamTypes, updateAppt } from '../services/r
 
 function useCreateAppointment() {
   const navigate = useNavigate()
-  const { ctxState, onSetIdAppt, onSetIdExamCtlg, onApptSelected, onError, onHideInfo } =
+  const { ctxState, onSetIdAppt, onSetIdExamCtlg, onApptSelected, onError, onClear } =
     useContext(context)
   const [appt, dispatch] = useReducer(appointmentReducer, initialAppointment)
 
@@ -81,7 +81,7 @@ function useCreateAppointment() {
     onReset()
 
     setTimeout(() => {
-      onHideInfo()
+      onClear()
       navigate('/HomeAppointments')
     }, 2000)
   }

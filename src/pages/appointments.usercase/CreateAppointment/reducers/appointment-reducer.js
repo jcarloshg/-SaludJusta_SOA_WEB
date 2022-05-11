@@ -12,7 +12,7 @@ const reducerObject = (state = '', payload = null) => ({
   [actions.onStopLoading]: { ...state, loading: false },
   [actions.onOpenConfirm]: { ...state, confirmOpen: true },
   [actions.onCloseConfirm]: { ...state, confirmOpen: false },
-  [actions.onReset]: { ...state, ...initialAppointment },
+  [actions.onReset]: { ...initialAppointment },
 })
 
 const appointmentReducer = (state, action) => {

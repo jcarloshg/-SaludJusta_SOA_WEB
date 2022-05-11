@@ -37,23 +37,25 @@ function useCreateCustomer(closeHandler = () => null) {
     onNextStep()
   }
 
-  const createCustomer = async () => {
-    onLoading()
-
-    const res = await createAccount(user)
-    if (res === null) return onError()
-    console.log('createCustomer', res)
-
-    onClear()
-    closeHandler()
-    onCustomerCreated()
-  }
-
   const onSaveCustomer = async () => {
     if (user.email === '' || user.phoneNumber === '') return onEmptyFields()
     if (!validateEmail(user.email)) return onEmailError()
     if (!validatePhone(user.phoneNumber)) return onPhoneError()
-    await createCustomer()
+
+    onLoading()
+    const res = await createAccount({
+      name: user.name,
+      lastName: user.lastName,
+      age: user.age,
+      gender: user.gender,
+      phoneNumber: user.phoneNumber,
+      email: user.email,
+    })
+    if (res === null) return onError()
+
+    onClear()
+    closeHandler()
+    onCustomerCreated()
   }
 
   const onOpenPopoverChange = () => {

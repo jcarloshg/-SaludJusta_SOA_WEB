@@ -38,7 +38,6 @@ const AppointmentsProvider = ({ children }) => {
   const onCustomerCreated = () => {
     onChangeInfoMsg('Usuario creado correctamente')
     onShowInfo()
-    // goToSelectAppt()
   }
 
   const onApptSelected = (exam = '', time = '', date = '') => {
