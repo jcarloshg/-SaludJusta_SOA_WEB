@@ -32,7 +32,7 @@ function InputPhone({ phone = '', setPhone = () => null, reset = () => null }) {
       helperText={helper.text}
       type="text"
       label="Número de teléfono"
-      placeholder="0001112233"
+      placeholder="000-000-0000"
     />
   )
 }

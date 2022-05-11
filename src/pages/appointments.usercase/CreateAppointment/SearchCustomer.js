@@ -1,8 +1,9 @@
-import { Button, Input, Loading, Spacer } from '@nextui-org/react'
+import { Button, Loading, Spacer } from '@nextui-org/react'
 import { useContext, useState } from 'react'
 import { Subtitle, Title } from '../../../components'
 import { AppointmentsContext as context } from '../HomeAppointments/contexts/AppointmentsContext'
 import { createCustomerButton, searchButton } from './components'
+import { InputEmail } from './components/Input'
 
 function SearchCustomer() {
   const { ctxState, onShowCreateCust, onSearchCustomer } = useContext(context)
@@ -20,18 +21,13 @@ function SearchCustomer() {
       <Subtitle>Buscar cliente por correo</Subtitle>
       <Spacer y={1} />
       <div className="col center">
-        <Input
-          label="Correo electrónico"
-          placeholder="correo@ejemplo.com"
-          value={email}
-          onChange={onChangeEmail}
-          autoComplete="off"
-          bordered
-          clearable
-          color="primary"
-          css={{ width: '330px' }}
+        <InputEmail
+          email={email}
+          setEmail={onChangeEmail}
+          fullWidth={false}
+          disabled={ctxState.loading}
         />
-        <Spacer y={1} />
+        <Spacer y={1.6} />
         <Button auto onClick={onSearch} disabled={ctxState.loading} css={searchButton}>
           {!ctxState.loading ? (
             'Buscar'

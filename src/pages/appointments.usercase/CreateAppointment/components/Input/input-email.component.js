@@ -2,7 +2,13 @@ import { Input } from '@nextui-org/react'
 import { useMemo } from 'react'
 import { validateEmail } from '../../../../../utilities'
 
-function InputEmail({ email = '', setEmail = () => null, reset = () => null }) {
+function InputEmail({
+  email = '',
+  setEmail = () => null,
+  reset = () => null,
+  fullWidth = true,
+  disabled = false,
+}) {
   const helper = useMemo(() => {
     if (!email)
       return {
@@ -22,7 +28,7 @@ function InputEmail({ email = '', setEmail = () => null, reset = () => null }) {
       onChange={setEmail}
       clearable
       bordered
-      fullWidth
+      fullWidth={fullWidth}
       size="sm"
       shadow={false}
       onClearClick={reset}
@@ -33,6 +39,8 @@ function InputEmail({ email = '', setEmail = () => null, reset = () => null }) {
       type="email"
       label="Correo electrónico"
       placeholder="correo@ejemplo.com"
+      width="330px"
+      disabled={disabled}
     />
   )
 }

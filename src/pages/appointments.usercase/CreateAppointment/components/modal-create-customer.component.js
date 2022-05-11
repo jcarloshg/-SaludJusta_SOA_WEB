@@ -31,7 +31,13 @@ function ModalCreateCustomer({
       </Modal.Header>
       <Modal.Body>{children}</Modal.Body>
       <Modal.Footer>
-        <Button flat color="error" onClick={onClose} auto disabled={loading}>
+        <Button
+          flat
+          auto
+          css={{ backgroundColor: '$error', color: '$white' }}
+          onClick={onClose}
+          disabled={loading}
+        >
           Cancelar
         </Button>
         <Popover placement="top" isOpen={openPopover} onOpenChange={onOpenChange}>

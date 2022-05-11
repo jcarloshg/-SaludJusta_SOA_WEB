@@ -1,6 +1,13 @@
 import initialUser from './initial-user'
 import userActions from './user-actions'
 
+const messages = [
+  'No dejes campos vacíos',
+  'Error al crear usuario',
+  'Email inválido',
+  'Teléfono inválido',
+]
+
 const reducerObject = (state = '', payload = null) => ({
   // Fields
   [userActions.onChangeName]: { ...state, name: payload },
@@ -22,14 +29,22 @@ const reducerObject = (state = '', payload = null) => ({
   [userActions.onChangeMessage]: { ...state, message: payload },
   [userActions.onClear]: { ...initialUser },
   // Handlers
-  [userActions.onEmptyFields]: {
-    ...state,
-    message: 'No dejes campos vacíos',
-    popover: true,
-  },
+  [userActions.onEmptyFields]: { ...state, message: messages[0], popover: true },
   [userActions.onError]: {
     ...state,
-    message: 'Error al crear usuario',
+    message: messages[1],
+    isLoading: false,
+    popover: true,
+  },
+  [userActions.onEmailError]: {
+    ...state,
+    message: messages[2],
+    isLoading: false,
+    popover: true,
+  },
+  [userActions.onPhoneError]: {
+    ...state,
+    message: messages[3],
     isLoading: false,
     popover: true,
   },

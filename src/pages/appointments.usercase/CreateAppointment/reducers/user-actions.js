@@ -17,6 +17,8 @@ const userActions = {
 
   onEmptyFields: 'ON_EMPTY_FIELDS',
   onError: 'ON_ERROR',
+  onEmailError: 'ON_EMAIL_ERROR',
+  onPhoneError: 'ON_PHONE_ERROR',
 }
 
 export default userActions

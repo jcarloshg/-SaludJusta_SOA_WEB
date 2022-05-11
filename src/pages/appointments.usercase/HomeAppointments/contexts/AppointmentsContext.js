@@ -1,4 +1,5 @@
 import { createContext, useReducer } from 'react'
+import { validateEmail } from '../../../../utilities'
 import { existAccount } from '../../CreateAppointment/services'
 import {
   appointmentsActions as actions,
@@ -28,21 +29,20 @@ const AppointmentsProvider = ({ children }) => {
 
   const onSearchCustomer = async (email = '') => {
     onLoading()
-
-    if (email === '') {
-      onError('Por favor ingrese un correo electrónico')
-      return
-    }
+    if (email === '') return onError('Por favor ingrese un correo electrónico')
+    if (!validateEmail(email)) return onError('Correo electrónico inválido')
 
     const res = await existAccount(email)
-
-    if (res === null) {
-      onError('El correo electrónico no existe')
-      return
-    }
+    if (res === null) return onError(`El correo electrónico "${email}" no fue encontrado`)
 
     onSetIdUser(res.data.idUser)
     goToSelectAppt()
+  }
+
+  const onCustomerCreated = () => {
+    onChangeInfoMsg('Usuario creado correctamente')
+    onShowInfo()
+    // goToSelectAppt()
   }
 
   return (
@@ -60,6 +60,7 @@ const AppointmentsProvider = ({ children }) => {
         onSetIdExamCtlg,
         onSetIdAppt,
         onClear,
+        onCustomerCreated,
       }}
     >
       {children}

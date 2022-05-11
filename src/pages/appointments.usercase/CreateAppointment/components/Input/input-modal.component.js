@@ -1,4 +1,4 @@
-import { Input } from '@nextui-org/react';
+import { Input } from '@nextui-org/react'
 
 function InputModal({ label = '', value = '', onChange = () => null, ...props }) {
   return (
@@ -8,7 +8,7 @@ function InputModal({ label = '', value = '', onChange = () => null, ...props })
       fullWidth
       color="primary"
       label={label}
-      placeholder={label}
+      placeholder="p. ej. Martha"
       css={{
         marginBottom: '0.8rem',
         // width: '18.75rem',
@@ -18,7 +18,7 @@ function InputModal({ label = '', value = '', onChange = () => null, ...props })
       size="sm"
       {...props}
     />
-  );
+  )
 }
 
-export default InputModal;
+export default InputModal

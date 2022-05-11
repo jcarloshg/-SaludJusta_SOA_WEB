@@ -8,7 +8,7 @@ function InputName({ value = '', onChange = () => null, ...props }) {
       fullWidth
       color="primary"
       label="Apellidos"
-      placeholder="Apellidos"
+      placeholder="p. ej. Pérez Gómez"
       css={{
         marginBottom: '0.8rem',
         // width: '18.75rem',

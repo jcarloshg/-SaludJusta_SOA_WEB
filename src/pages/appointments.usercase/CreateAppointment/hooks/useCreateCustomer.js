@@ -2,9 +2,10 @@ import { useContext, useReducer } from 'react'
 import { createAccount } from '../services'
 import { AppointmentsContext as context } from '../../HomeAppointments/contexts/AppointmentsContext'
 import { initialUser, userActions as actions, userReducer } from '../reducers'
+import { validateEmail, validatePhone } from '../../../../utilities'
 
 function useCreateCustomer(closeHandler = () => null) {
-  const { onChangeInfoMsg, onShowInfo, goToSelectAppt } = useContext(context)
+  const { onCustomerCreated } = useContext(context)
   const [user, dispatch] = useReducer(userReducer, initialUser)
 
   const userDispatch = (type = '', payload = null) => dispatch({ type, payload })
@@ -14,7 +15,11 @@ function useCreateCustomer(closeHandler = () => null) {
   const onChangeAge = e => userDispatch(actions.onChangeAge, e.target.value)
   const onChangeGender = e => userDispatch(actions.onChangeGender, e.target.value)
   const onChangeEmail = e => userDispatch(actions.onChangeEmail, e.target.value)
-  const onChangePhone = e => userDispatch(actions.onChangePhone, e.target.value)
+  const onChangePhone = e => {
+    // Delete all non-numeric characters
+    const value = e.target.value.replace(/\D/g, '')
+    userDispatch(actions.onChangePhone, value)
+  }
 
   const onNextStep = () => dispatch({ type: actions.onNextStep })
   const onPreviusStep = () => dispatch({ type: actions.onPreviusStep })
@@ -24,37 +29,30 @@ function useCreateCustomer(closeHandler = () => null) {
   const onClear = () => dispatch({ type: actions.onClear })
   const onEmptyFields = () => dispatch({ type: actions.onEmptyFields })
   const onError = () => dispatch({ type: actions.onError })
+  const onEmailError = () => dispatch({ type: actions.onEmailError })
+  const onPhoneError = () => dispatch({ type: actions.onPhoneError })
 
   const goToNextStep = () => {
-    if (user.name === '' || user.lastName === '' || user.age < 18) {
-      onEmptyFields()
-      return
-    }
+    if (user.name === '' || user.lastName === '') return onEmptyFields()
     onNextStep()
   }
 
   const createCustomer = async () => {
     onLoading()
+
     const res = await createAccount(user)
-    if (res === null) {
-      onError()
-      return
-    }
+    if (res === null) return onError()
     console.log('createCustomer', res)
 
     onClear()
     closeHandler()
-
-    onChangeInfoMsg('Usuario creado correctamente')
-    onShowInfo()
-    goToSelectAppt()
+    onCustomerCreated()
   }
 
   const onSaveCustomer = async () => {
-    if (user.email === '' || user.phone === '') {
-      onEmptyFields()
-      return
-    }
+    if (user.email === '' || user.phoneNumber === '') return onEmptyFields()
+    if (!validateEmail(user.email)) return onEmailError()
+    if (!validatePhone(user.phoneNumber)) return onPhoneError()
     await createCustomer()
   }
 
