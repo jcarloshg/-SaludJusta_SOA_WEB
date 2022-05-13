@@ -24,8 +24,8 @@ export const useLogin = () => {
     };
 
     const iniciarSesion_proof = async () => {
-        const emailExample = "luis@email.com";
-        const passwordExample = "luis123";
+        const emailExample = "richie@email.com";
+        const passwordExample = "richie123";
 
         const resExistAccount = await existAccount(emailExample);
 
