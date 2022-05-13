@@ -1,30 +1,29 @@
-import './dropdown.css';
-
-const { log } = console;
+import uid from '../utilities/uid'
+import './dropdown.css'
 
 function Dropdown({
-  fullWidth = false,
+  fullWidth = true,
   label = '',
   value = '',
   options = [],
-  onChange = () => log('onChange not defined'),
+  onChange = () => null,
 }) {
   return (
-    <label className="dropdown-label">
+    <label className="dropdown-label full-width">
       <p>{label}</p>
       <select
         className={`dropdown-select${fullWidth ? ' full-width' : ''}`}
         value={value}
         onChange={onChange}
       >
-        {options.map((option) => (
-          <option className="dropdown-option" key={option.value} value={option.value}>
+        {options.map(option => (
+          <option className="dropdown-option" key={uid()} value={option.value}>
             {option.label}
           </option>
         ))}
       </select>
     </label>
-  );
+  )
 }
 
-export default Dropdown;
+export default Dropdown

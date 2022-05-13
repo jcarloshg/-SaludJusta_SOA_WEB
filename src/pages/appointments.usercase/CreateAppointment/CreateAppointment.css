@@ -1,0 +1,21 @@
+.create-appointment-main {
+  padding: 0 1rem;
+}
+
+.create-appointment-container {
+  border-radius: 2rem;
+  /* box-shadow: 0 0 0.2rem #c1c1c1; */
+  padding: 1rem 1rem;
+  /* max-width: 30rem; */
+}
+
+.select-appointment-container {
+  border-radius: 2rem;
+  /* box-shadow: 0 0 0.2rem #c1c1c1; */
+  padding: 0 1rem;
+  /* max-width: 32rem; */
+}
+
+.select-appointment {
+  margin: 0 auto;
+}

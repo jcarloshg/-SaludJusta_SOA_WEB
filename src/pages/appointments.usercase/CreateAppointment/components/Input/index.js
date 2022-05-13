@@ -1,0 +1,5 @@
+export { default as InputAge } from './input-age.component'
+export { default as InputEmail } from './input-email.component'
+export { default as InputModal } from './input-modal.component'
+export { default as InputName } from './input-name.component'
+export { default as InputPhone } from './input-phone.component'

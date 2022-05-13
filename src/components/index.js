@@ -1,5 +1,6 @@
 export { default as Dropdown } from './dropdown.component';
 export { default as ErrorButton } from './error-button.component';
+export { default as GoBackButton } from './go-back-button.component';
 export { default as MainTitle } from './main-title.component';
 export { default as MainButton } from './main-button.component';
 export { default as SecondaryButton } from './secondary-button.component';
